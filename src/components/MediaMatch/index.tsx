@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import media, { DefaultBreakpoints } from 'styled-media-query'
 
+//pegando apenas as chaves do object
 type breakpoint = keyof DefaultBreakpoints
 
 export type MediaMatchProps = {

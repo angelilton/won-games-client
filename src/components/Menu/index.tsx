@@ -51,7 +51,7 @@ const Menu = ({ username }: MenuProps) => {
         )}
       </S.MenuGroup>
 
-      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+      <S.MobileMenu aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="close menu" onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>
@@ -75,7 +75,7 @@ const Menu = ({ username }: MenuProps) => {
             </S.CreateAccount>
           </S.RegisterBox>
         )}
-      </S.MenuFull>
+      </S.MobileMenu>
     </S.Wrapper>
   )
 }

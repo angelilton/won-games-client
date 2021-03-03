@@ -9,6 +9,14 @@ export const Wrapper = styled.menu`
     position: relative;
   `}
 `
+export const IconWrapper = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    cursor: pointer;
+    width: 2.4rem;
+    height: 2.4rem;
+  `}
+`
 
 export const LogoWrapper = styled.div`
   ${media.lessThan('medium')`
@@ -31,14 +39,6 @@ export const MenuGroup = styled.div`
   `}
 `
 
-export const IconWrapper = styled.div`
-  ${({ theme }) => css`
-    color: ${theme.colors.white};
-    cursor: pointer;
-    width: 2.4rem;
-    height: 2.4rem;
-  `}
-`
 export const MenuNav = styled.div`
   ${({ theme }) => css`
     ${media.greaterThan('medium')`
@@ -78,11 +78,11 @@ export const MenuLink = styled.a`
   `}
 `
 
-type MenuFullProps = {
+type MobileMenuProps = {
   isOpen: boolean
 }
 
-export const MenuFull = styled.nav<MenuFullProps>`
+export const MobileMenu = styled.nav<MobileMenuProps>`
   ${({ theme, isOpen }) => css`
     display: flex;
     flex-direction: column;
@@ -99,6 +99,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
     opacity: ${isOpen ? 1 : 0};
     pointer-events: ${isOpen ? 'all' : 'none'};
 
+    // CloseIcon style
     > svg {
       position: absolute;
       top: 0;
@@ -109,6 +110,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       height: 2.4rem;
     }
 
+    //MenuNav styles in mobile
     ${MenuNav} {
       display: flex;
       align-items: center;
@@ -117,6 +119,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       flex-direction: column;
     }
 
+    //MenuLink styles in mobile
     ${MenuLink} {
       color: ${theme.colors.black};
       font-weight: ${theme.font.bold};
@@ -126,6 +129,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       transition: transform 0.3s ease-in-out;
     }
 
+    //register buttons styles in mobile
     ${RegisterBox} {
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform 0.3s ease-in-out;

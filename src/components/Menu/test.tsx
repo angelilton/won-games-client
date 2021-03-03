@@ -13,7 +13,7 @@ describe('<Menu />', () => {
     expect(screen.getByLabelText(/open shopping cart/i)).toBeInTheDocument()
   })
 
-  it('sould handle the open/close mobile Menu', () => {
+  it('should handle the open/close mobile Menu', () => {
     renderWithTheme(<Menu />)
 
     // selecionar o nosso MenuFull
@@ -44,7 +44,7 @@ describe('<Menu />', () => {
     expect(screen.queryByText(/wishlist/i)).not.toBeInTheDocument()
   })
 
-  it('should show wishlight and account when logged in', () => {
+  it('should show wishLight and account when logged in', () => {
     renderWithTheme(<Menu username="angel" />)
 
     expect(screen.getByText(/my account/i)).toBeInTheDocument()
