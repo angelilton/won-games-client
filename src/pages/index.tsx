@@ -1,5 +1,5 @@
-import Menu from 'components/Menu'
+import Home from 'templates/Home'
 
-export default function Home() {
-  return <Menu />
+export default function index() {
+  return <Home />
 }
