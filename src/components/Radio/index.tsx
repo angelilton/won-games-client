@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from 'react'
 import { typeColor } from 'types/types'
 import * as S from './styles'
 
-export type CheckboxProps = {
+export type checkboxProps = {
   onCheck?: (status: boolean) => void
   label?: string
   labelFor?: string
@@ -18,7 +18,7 @@ const Checkbox = ({
   labelColor = 'white',
   isChecked = false,
   ...props
-}: CheckboxProps) => {
+}: checkboxProps) => {
   // controlled component (state)
   const [checked, setChecked] = useState(isChecked)
 

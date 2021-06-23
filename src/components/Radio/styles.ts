@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { CheckboxProps } from '.'
+import { checkboxProps } from '.'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ export const Input = styled.input`
   `}
 `
 
-export const Label = styled.label<Pick<CheckboxProps, 'labelColor'>>`
+export const Label = styled.label<Pick<checkboxProps, 'labelColor'>>`
   ${({ theme, labelColor }) => css`
     color: ${theme.colors[labelColor!]};
     line-height: 1.5rem;
