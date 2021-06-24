@@ -1,9 +1,14 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
-import Checkbox, { checkboxProps } from '.'
+import Radio, { RadioProps } from '.'
 
 export default {
-  title: 'Checkbox',
-  component: Checkbox,
+  title: 'Radio',
+  component: Radio,
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
   argTypes: {
     onCheck: {
       action: 'checked'
@@ -11,4 +16,27 @@ export default {
   }
 } as Meta
 
-export const Default: Story<checkboxProps> = (args) => <Checkbox {...args} />
+export const Default: Story<RadioProps> = (args) => (
+  <>
+    <div style={{ padding: 10 }}>
+      <Radio
+        label="Primeiro"
+        labelFor="primeiro"
+        id="primeiro"
+        name="nome"
+        value="primeiro"
+        {...args}
+      />
+    </div>
+    <div style={{ padding: 10 }}>
+      <Radio
+        label="Segundo"
+        labelFor="segundo"
+        id="segundo"
+        name="nome"
+        value="segundo"
+        {...args}
+      />
+    </div>
+  </>
+)

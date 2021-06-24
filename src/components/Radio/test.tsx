@@ -3,58 +3,56 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import userEvent from '@testing-library/user-event'
 
-import Checkbox from '.'
+import Radio from '.'
+import theme from 'styles/theme'
 
-describe('<Checkbox />', () => {
-  it('should render with label', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="userName" />)
-    expect(screen.getByRole('checkbox')).toBeInTheDocument()
+describe('<Radio />', () => {
+  it('should render with white label', () => {
+    renderWithTheme(<Radio label="radio" labelFor="check" value="anyValue" />)
 
-    expect(screen.getByText(/checkbox label/i)).toHaveAttribute(
-      'for',
-      'userName'
-    )
-
-    //se o input e o label estao associados
-    expect(screen.getByLabelText(/checkbox label/i)).toBeInTheDocument()
+    const label = screen.getByText('radio')
+    expect(label).toBeInTheDocument()
+    expect(label).toHaveStyle({ color: theme.colors.white })
   })
 
   it('should render with black label', () => {
     renderWithTheme(
-      <Checkbox label="checkbox label" labelFor="userName" labelColor="black" />
+      <Radio label="radio" value="anyValue 1" labelColor="black" />
     )
 
-    expect(screen.getByText(/checkbox label/i)).toHaveStyleRule(
-      'color',
-      '#030517'
-    )
+    const label = screen.getByText('radio')
+    expect(label).toBeInTheDocument()
+    expect(label).toHaveStyle({ color: theme.colors.black })
   })
 
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="checkbox" onCheck={onCheck} />)
+    renderWithTheme(
+      <Radio
+        label="Radio"
+        labelFor="Radio"
+        onCheck={onCheck}
+        value="anyValue"
+      />
+    )
 
     expect(onCheck).not.toHaveBeenCalled()
 
-    userEvent.click(screen.getByRole('checkbox'))
+    userEvent.click(screen.getByLabelText('Radio'))
     await waitFor(() => {
       expect(onCheck).toHaveBeenCalledTimes(1)
     })
-    expect(onCheck).toHaveBeenCalledWith(true)
+    expect(onCheck).toHaveBeenCalledWith('anyValue')
   })
 
-  it('should dispatch onCheck when isChecked is pass', async () => {
-    const onCheck = jest.fn()
+  it('should be accessible with tab', () => {
+    renderWithTheme(<Radio label="Radio" labelFor="Radio" />)
 
-    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
+    const radio = screen.getByLabelText('Radio')
 
-    userEvent.click(screen.getByRole('checkbox'))
-    await waitFor(() => {
-      expect(onCheck).toHaveBeenCalledTimes(1)
-    })
-    expect(onCheck).toHaveBeenCalledWith(false)
+    expect(document.body).toHaveFocus()
+    userEvent.tab()
+    expect(radio).toHaveFocus()
   })
 })
-
-// screen.debug(screen.getByRole('heading', { name: /Checkbox/i })

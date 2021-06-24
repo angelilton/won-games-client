@@ -1,43 +1,33 @@
-import { useState } from 'react'
 import { InputHTMLAttributes } from 'react'
-import { typeColor } from 'types/types'
+import { typeColor, RadioValue } from 'types/types'
+
 import * as S from './styles'
 
-export type checkboxProps = {
-  onCheck?: (status: boolean) => void
+export type RadioProps = {
+  onCheck?: (value?: RadioValue) => void
   label?: string
   labelFor?: string
   labelColor?: typeColor
-  isChecked?: boolean
+  value?: RadioValue
 } & InputHTMLAttributes<HTMLInputElement>
 
-const Checkbox = ({
+const Radio = ({
   onCheck,
   label,
   labelFor = '',
   labelColor = 'white',
-  isChecked = false,
+  value,
   ...props
-}: checkboxProps) => {
-  // controlled component (state)
-  const [checked, setChecked] = useState(isChecked)
-
-  const onChange = () => {
-    const status = !checked
-    setChecked(status)
-
-    if (onCheck) {
-      onCheck(status)
-    }
-  }
+}: RadioProps) => {
+  const onChange = () => !!onCheck && onCheck(value)
 
   return (
     <S.Wrapper>
       <S.Input
         id={labelFor}
-        type="checkbox"
+        type="radio"
+        value={value}
         onChange={onChange}
-        checked={checked}
         {...props}
       />
 
@@ -50,4 +40,4 @@ const Checkbox = ({
   )
 }
 
-export default Checkbox
+export default Radio
