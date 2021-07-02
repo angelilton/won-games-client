@@ -9,6 +9,9 @@ export default {
     labelFor: 'E-mail',
     id: 'Email',
     placeholder: 'john.cage@gmail.com'
+  },
+  argTypes: {
+    onInput: { action: 'changed' }
   }
 } as Meta
 
