@@ -60,4 +60,44 @@ describe('<TextField />', () => {
 
     expect(onInput).toHaveBeenCalledWith(text)
   })
+
+  it('Changes its value when typing', async () => {
+    const onInput = jest.fn()
+    renderWithTheme(
+      <TextField
+        label="Label"
+        labelFor="Field"
+        id="Field"
+        onInput={onInput}
+        disabled
+      />
+    )
+
+    const text = 'this is my text'
+    const input = screen.getByRole('textbox')
+
+    expect(input).toBeDisabled()
+
+    userEvent.type(input, text)
+
+    await waitFor(() => {
+      expect(input).not.toHaveValue(text)
+    })
+
+    expect(onInput).not.toHaveBeenCalled()
+  })
+
+  it('Renders with error', () => {
+    renderWithTheme(
+      <TextField
+        label="Label"
+        labelFor="Field"
+        icon={<Email data-testid="icon" />}
+        error="error message"
+      />
+    )
+
+    const error = screen.getByText('error message')
+    expect(error).toBeInTheDocument()
+  })
 })

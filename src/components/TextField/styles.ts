@@ -1,10 +1,13 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { Position } from 'types/types'
-
-export const Wrapper = styled.div``
 
 type IconPositionProps = {
   iconPosition?: Position
+}
+
+type WrapperProps = {
+  disabled?: boolean
+  error?: boolean
 }
 
 export const InputWrapper = styled.div`
@@ -53,5 +56,43 @@ export const Icon = styled.div<IconPositionProps>`
     & > svg {
       width: 100%;
     }
+  `}
+`
+export const Error = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.error};
+    font-size: ${theme.font.sizes.xsmall};
+  `}
+`
+
+const wrapperModifiers = {
+  error: (theme: DefaultTheme) => css`
+    ${InputWrapper} {
+      border-color: ${theme.colors.error};
+    }
+
+    ${Icon},
+    ${Label} {
+      color: ${theme.colors.error};
+    }
+  `,
+
+  disabled: (theme: DefaultTheme) => css`
+    ${Label},
+    ${Input},
+    ${Icon} {
+      cursor: not-allowed;
+      color: ${theme.colors.gray};
+      &::placeholder {
+        color: currentColor;
+      }
+    }
+  `
+}
+
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ theme, error, disabled }) => css`
+    ${error && wrapperModifiers.error(theme)}
+    ${disabled && wrapperModifiers.disabled(theme)}
   `}
 `
