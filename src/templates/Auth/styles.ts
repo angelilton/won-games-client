@@ -5,9 +5,10 @@ import * as HeadingStyles from 'components/Heading/styles'
 import media from 'styled-media-query'
 
 export const Wrapper = styled.main`
+  height: 100vh;
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr;
-  height: 100vh;
 
   ${media.greaterThan('medium')`
     grid-template-columns: 1fr 1fr;
@@ -24,7 +25,7 @@ export const BannerBlock = styled.div`
       ${theme.spacings.large};
 
     ${media.lessThan('medium')`
-      {display: none;
+      display: none;
     `}
 
     &:after {
