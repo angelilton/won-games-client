@@ -88,7 +88,8 @@ export const MobileMenu = styled.nav<MobileMenuProps>`
     flex-direction: column;
     justify-content: space-between;
     background: ${theme.colors.white};
-    position: absolute;
+    position: fixed;
+    z-index: ${theme.layers.menu};
     top: 0;
     bottom: 0;
     left: 0;
@@ -143,6 +144,7 @@ export const RegisterBox = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0 ${theme.spacings.xlarge} ${theme.spacings.xlarge};
+
     > span {
       display: block;
       margin: ${theme.spacings.xxsmall} 0;
