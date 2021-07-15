@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import Slider, { SliderSettings } from 'components/Slider'
+import { Close } from '@styled-icons/material-outlined/Close'
+
 import * as S from './styles'
 
 const settings: SliderSettings = {
@@ -50,20 +53,32 @@ export type GalleryProps = {
   items: GalleryImgProps[]
 }
 
-const Gallery = ({ items }: GalleryProps) => (
-  <S.Wrapper>
-    <Slider settings={settings}>
-      {items?.map((item, index) => (
-        <img
+const Gallery = ({ items }: GalleryProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <S.Wrapper>
+      <Slider settings={settings}>
+        {items.map((item, index) => (
+          <img
+            role="button"
+            src={item.src}
+            alt={`Thumb - ${item.label}`}
+            key={`thumb-${index}`}
+            onClick={() => setIsOpen(true)}
+          />
+        ))}
+      </Slider>
+      <S.Modal isOpen={isOpen} aria-label="modal" aria-hidden={!isOpen}>
+        <S.Close
           role="button"
-          src={item.src}
-          alt={`Thumb - ${item.label}`}
-          key={`thumb-${index}`}
-        />
-      ))}
-    </Slider>
-    <S.Modal aria-label="modal" aria-hidden="true"></S.Modal>
-  </S.Wrapper>
-)
+          aria-label="close modal"
+          onClick={() => setIsOpen(false)}
+        >
+          <Close size={40} />
+        </S.Close>
+      </S.Modal>
+    </S.Wrapper>
+  )
+}
 
 export default Gallery
