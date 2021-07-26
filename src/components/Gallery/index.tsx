@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import Slider, { SliderSettings } from 'components/Slider'
 import { Close } from '@styled-icons/material-outlined/Close'
+
+import SlickSlider from 'react-slick'
 
 import * as S from './styles'
 
@@ -44,6 +46,15 @@ const settings: SliderSettings = {
   prevArrow: <ArrowLeft aria-label="previous games" />
 }
 
+const modalSettings: SliderSettings = {
+  slidesToShow: 1,
+  infinite: false,
+  lazyLoad: 'ondemand',
+  arrows: true,
+  nextArrow: <ArrowRight aria-label="next image" />,
+  prevArrow: <ArrowLeft aria-label="previous image" />
+}
+
 export type GalleryImgProps = {
   src: string
   label: string
@@ -55,6 +66,7 @@ export type GalleryProps = {
 
 const Gallery = ({ items }: GalleryProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const slider = useRef<SlickSlider>(null)
 
   useEffect(() => {
     function handleKeyUp({ key }: KeyboardEvent) {
@@ -66,14 +78,17 @@ const Gallery = ({ items }: GalleryProps) => {
 
   return (
     <S.Wrapper>
-      <Slider settings={settings}>
+      <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
           <img
             role="button"
             src={item.src}
             alt={`Thumb - ${item.label}`}
             key={`thumb-${index}`}
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true)
+              slider.current!.slickGoTo(index, true)
+            }}
           />
         ))}
       </Slider>
@@ -85,6 +100,13 @@ const Gallery = ({ items }: GalleryProps) => {
         >
           <Close size={40} />
         </S.Close>
+        <S.Content>
+          <Slider ref={slider} settings={modalSettings}>
+            {items.map((item, index) => (
+              <img src={item.src} alt={item.label} key={`gallery-${index}`} />
+            ))}
+          </Slider>
+        </S.Content>
       </S.Modal>
     </S.Wrapper>
   )

@@ -75,4 +75,17 @@ describe('<Gallery />', () => {
     expect(modal.getAttribute('aria-hidden')).toBe('true')
     expect(modal).toHaveStyle({ opacity: 0 })
   })
+
+  it('should open modal with selected image', async () => {
+    renderWithTheme(<Gallery items={mockItems.slice(0, 2)} />)
+
+    // clicked by img
+    fireEvent.click(
+      screen.getByRole('button', { name: /Thumb - Gallery Image 2/i })
+    )
+
+    // have to show the same img is clicked
+    const img = await screen.findByRole('img', { name: /Gallery Image 2/i })
+    expect(img.parentElement?.parentElement).toHaveClass('slick-active')
+  })
 })
