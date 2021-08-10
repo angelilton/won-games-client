@@ -12,3 +12,11 @@ export default {
 } as Meta
 
 export const Default: Story<CartItemProps> = (args) => <CartItem {...args} />
+
+export const WithPayment: Story<CartItemProps> = (args) => (
+  <CartItem {...args} />
+)
+
+WithPayment.args = {
+  downloadLink: 'https://wongames.com/game/download/21312ndasd'
+}

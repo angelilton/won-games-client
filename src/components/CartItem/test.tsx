@@ -18,4 +18,11 @@ describe('<CartItem />', () => {
 
     expect(screen.getByRole('img')).toHaveAttribute('src', props.img)
   })
+
+  it('should render the item with download link', () => {
+    const downloadLink = 'https://link'
+    renderWithTheme(<CartItem {...props} downloadLink={downloadLink} />)
+
+    expect(screen.getByRole('link')).toHaveAttribute('href', downloadLink)
+  })
 })
