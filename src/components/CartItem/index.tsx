@@ -1,15 +1,29 @@
 import { Download } from '@styled-icons/boxicons-solid/Download'
+import { CcMastercard, CcVisa } from 'styled-icons/fa-brands'
 
 import * as S from './styles'
+
+export type PaymentInfoProps = {
+  number: string
+  flag: string
+  purchaseDate: string
+}
 
 export type CartItemProps = {
   img: string
   title: string
   price: string
   downloadLink?: string
+  paymentInfo?: PaymentInfoProps
 }
 
-const CartItem = ({ img, title, price, downloadLink }: CartItemProps) => (
+const CartItem = ({
+  img,
+  title,
+  price,
+  downloadLink,
+  paymentInfo
+}: CartItemProps) => (
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
@@ -32,6 +46,20 @@ const CartItem = ({ img, title, price, downloadLink }: CartItemProps) => (
         <S.Price>{price}</S.Price>
       </S.Content>
     </S.GameContent>
+
+    {!!paymentInfo && (
+      <S.PaymentContent>
+        <p>{paymentInfo.purchaseDate}</p>
+        <S.CardInfo>
+          <span>{paymentInfo.number}</span>
+          {paymentInfo.flag === 'mastercard' ? (
+            <CcMastercard size={30} aria-label="mastercard" />
+          ) : (
+            <CcVisa size={30} aria-label="visa" />
+          )}
+        </S.CardInfo>
+      </S.PaymentContent>
+    )}
   </S.Wrapper>
 )
 
