@@ -5,8 +5,8 @@ export default {
   title: 'Cart/CartItem',
   component: CartItem,
   args: {
-    img: 'https://source.unsplash.com/user/willianjusten/151x70',
-    title: 'Red Dead Redemption 2',
+    img: '/img/image-4.png',
+    title: 'Borderlands 3',
     price: 'R$ 215,00'
   }
 } as Meta
