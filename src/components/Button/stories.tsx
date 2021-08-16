@@ -18,7 +18,8 @@ export default {
 export const Default: Story = (args) => <Button {...args} />
 
 Default.args = {
-  children: 'Buy Now'
+  children: 'Buy Now',
+  disabled: true
 }
 
 export const widthIcon: Story = (args) => <Button {...args} />
