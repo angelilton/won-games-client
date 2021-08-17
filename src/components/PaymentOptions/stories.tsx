@@ -16,6 +16,11 @@ export default {
     handlePayment: {
       action: 'clicked'
     }
+  },
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 } as Meta
 
