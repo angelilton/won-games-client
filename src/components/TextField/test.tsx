@@ -8,7 +8,7 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should renders with Label', () => {
-    renderWithTheme(<TextField label="Label" labelFor="Field" id="Field" />)
+    renderWithTheme(<TextField label="Label" name="label" />)
 
     expect(screen.getByText('Label')).toBeInTheDocument()
   })
@@ -28,8 +28,7 @@ describe('<TextField />', () => {
   it('Render with Icon', () => {
     renderWithTheme(<TextField icon={<Email data-testid="icon" />} />)
 
-    const icon = screen.getByTestId('icon')
-    expect(icon).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
   it('Render with Icon on the right side', () => {
@@ -37,16 +36,15 @@ describe('<TextField />', () => {
       <TextField icon={<Email data-testid="icon" />} iconPosition="right" />
     )
 
-    const icon = screen.getByTestId('icon')
-    expect(icon.parentElement).toHaveStyle({ order: 1 })
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({
+      order: 1
+    })
   })
 
   it('Changes its value when typing', async () => {
     const onInput = jest.fn()
 
-    renderWithTheme(
-      <TextField label="Label" labelFor="Field" id="Field" onInput={onInput} />
-    )
+    renderWithTheme(<TextField label="Label" name="Field" onInput={onInput} />)
 
     const text = 'this is my text'
     const input = screen.getByRole('textbox')
@@ -64,24 +62,15 @@ describe('<TextField />', () => {
   it('Changes its value when typing', async () => {
     const onInput = jest.fn()
     renderWithTheme(
-      <TextField
-        label="Label"
-        labelFor="Field"
-        id="Field"
-        onInput={onInput}
-        disabled
-      />
+      <TextField label="Label" name="Field" onInput={onInput} disabled />
     )
 
-    const text = 'this is my text'
-    const input = screen.getByRole('textbox')
+    expect(screen.getByRole('textbox')).toBeDisabled()
 
-    expect(input).toBeDisabled()
-
-    userEvent.type(input, text)
+    userEvent.type(screen.getByRole('textbox'), 'this is my text')
 
     await waitFor(() => {
-      expect(input).not.toHaveValue(text)
+      expect(screen.getByRole('textbox')).not.toHaveValue('this is my text')
     })
 
     expect(onInput).not.toHaveBeenCalled()
@@ -91,13 +80,11 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="Label"
-        labelFor="Field"
         icon={<Email data-testid="icon" />}
         error="error message"
       />
     )
 
-    const error = screen.getByText('error message')
-    expect(error).toBeInTheDocument()
+    expect(screen.getByText('error message')).toBeInTheDocument()
   })
 })
