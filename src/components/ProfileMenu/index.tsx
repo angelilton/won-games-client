@@ -8,24 +8,28 @@ import Link from 'next/link'
 
 import * as S from './styles'
 
-const ProfileMenu = () => (
+export type ProfileMenuProps = {
+  activeLink?: '/profile/me' | '/profile/cards' | '/profile/orders'
+}
+
+const ProfileMenu = ({ activeLink }: ProfileMenuProps) => (
   <S.Nav>
     <Link href="/profile/me" passHref>
-      <S.Link>
+      <S.Link title="My profile" isActive={activeLink === '/profile/me'}>
         <AccountCircle size={24} />
         <span>My profile</span>
       </S.Link>
     </Link>
 
     <Link href="/profile/cards" passHref>
-      <S.Link>
+      <S.Link title="My cards" isActive={activeLink === '/profile/cards'}>
         <CreditCard size={24} />
         <span>My Cards</span>
       </S.Link>
     </Link>
 
     <Link href="/profile/orders" passHref>
-      <S.Link>
+      <S.Link title="My orders" isActive={activeLink === '/profile/orders'}>
         <FormatListBulleted size={24} />
         <span>My orders</span>
       </S.Link>
