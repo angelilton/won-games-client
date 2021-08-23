@@ -9,7 +9,7 @@ export type PaymentInfoProps = {
   purchaseDate: string
 }
 
-export type CartItemProps = {
+export type OrderItemProps = {
   img: string
   title: string
   price: string
@@ -17,13 +17,13 @@ export type CartItemProps = {
   paymentInfo?: PaymentInfoProps
 }
 
-const CartItem = ({
+const OrderItem = ({
   img,
   title,
   price,
   downloadLink,
   paymentInfo
-}: CartItemProps) => (
+}: OrderItemProps) => (
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
@@ -63,4 +63,4 @@ const CartItem = ({
   </S.Wrapper>
 )
 
-export default CartItem
+export default OrderItem

@@ -1,9 +1,9 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
-import CartItem, { CartItemProps } from '.'
+import OrderItem, { OrderItemProps } from '.'
 
 export default {
-  title: 'Cart/CartItem',
-  component: CartItem,
+  title: 'Cart/OrderItem',
+  component: OrderItem,
   args: {
     img: '/img/image-4.png',
     title: 'Borderlands 3',
@@ -11,10 +11,10 @@ export default {
   }
 } as Meta
 
-export const Default: Story<CartItemProps> = (args) => <CartItem {...args} />
+export const Default: Story<OrderItemProps> = (args) => <OrderItem {...args} />
 
-export const WithPayment: Story<CartItemProps> = (args) => (
-  <CartItem {...args} />
+export const WithPayment: Story<OrderItemProps> = (args) => (
+  <OrderItem {...args} />
 )
 
 WithPayment.args = {

@@ -1,16 +1,16 @@
-import CartItem, { CartItemProps } from 'components/CartItem'
+import OrderItem, { OrderItemProps } from 'components/OrderItem'
 
 import * as S from './styles'
 
 export type CartListProps = {
-  items: CartItemProps[]
+  items: OrderItemProps[]
   total: string
 }
 
 const CartList = ({ items, total }: CartListProps) => (
   <S.Wrapper>
     {items.map((item) => (
-      <CartItem key={item.title} {...item} />
+      <OrderItem key={item.title} {...item} />
     ))}
 
     <S.Footer>
