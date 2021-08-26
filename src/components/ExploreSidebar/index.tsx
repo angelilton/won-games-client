@@ -21,12 +21,32 @@ type ItemProps = {
   fields: Field[]
 }
 
-export type ExploreSidebarProps = {
-  items: ItemProps[]
+type Values = {
+  [field: string]: boolean | string
 }
 
-const ExploreSidebar = ({ items }: ExploreSidebarProps) => {
+export type ExploreSidebarProps = {
+  items: ItemProps[]
+  initialValues?: Values
+  onFilter: (values: Values) => void
+}
+
+const ExploreSidebar = ({
+  items,
+  onFilter,
+  initialValues = {}
+}: ExploreSidebarProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [values, setValues] = useState(initialValues)
+
+  const handleChange = (name: string, value: string | boolean) => {
+    setValues((item) => ({ ...item, [name]: value }))
+  }
+
+  const handleFilter = () => {
+    onFilter(values)
+    setIsOpen(false)
+  }
 
   return (
     <S.Wrapper isOpen={isOpen}>
@@ -50,6 +70,8 @@ const ExploreSidebar = ({ items }: ExploreSidebarProps) => {
                   name={field.name}
                   label={field.label}
                   labelFor={field.name}
+                  isChecked={!!values[field.name]}
+                  onCheck={(value) => handleChange(field.name, value)}
                 />
               ))}
 
@@ -62,6 +84,8 @@ const ExploreSidebar = ({ items }: ExploreSidebarProps) => {
                   name={item.name}
                   label={field.label}
                   labelFor={field.name}
+                  defaultChecked={field.name === values[item.name]}
+                  onChange={() => handleChange(item.name, field.name)}
                 />
               ))}
           </S.Items>
@@ -69,7 +93,7 @@ const ExploreSidebar = ({ items }: ExploreSidebarProps) => {
       </S.Content>
 
       <S.Footer>
-        <Button fullWidth size="medium">
+        <Button fullWidth size="medium" onClick={handleFilter}>
           Filter
         </Button>
       </S.Footer>

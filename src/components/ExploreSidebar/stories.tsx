@@ -19,6 +19,9 @@ export default {
 
 export const Default: Story<ExploreSidebarProps> = (args) => (
   <div style={{ padding: 16, maxWidth: 320 }}>
-    <ExploreSidebar {...args} />
+    <ExploreSidebar
+      {...args}
+      initialValues={{ windows: true, sort_by: 'low-to-high' }}
+    />
   </div>
 )
