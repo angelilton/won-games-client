@@ -14,7 +14,7 @@ type Field = {
   name: string
 }
 
-type ItemProps = {
+export type ItemProps = {
   title: string
   name: string
   type: string
