@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { tint } from 'polished'
 import media from 'styled-media-query'
 
-export const Wrapper = styled.main`
+export const Wrapper = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.white};
     display: flex;
@@ -20,6 +20,7 @@ export const Footer = styled.div`
       font-weight: ${theme.font.bold};
       color: ${theme.colors.black};
       display: flex;
+      align-items: center;
       justify-content: space-between;
 
       ${media.greaterThan('medium')`

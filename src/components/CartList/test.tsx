@@ -13,4 +13,10 @@ describe('<CartList />', () => {
       color: '#F231A5'
     })
   })
+
+  it('should render the button', () => {
+    renderWithTheme(<CartList items={mockItems} total="R$ 450,00" hasButton />)
+
+    expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+  })
 })
