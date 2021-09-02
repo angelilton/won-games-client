@@ -8,6 +8,7 @@ export type DropdownProps = {
 
 const Dropdown = ({ nav, children }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
+
   return (
     <S.Wrapper isOpen={isOpen}>
       <S.Nav onClick={() => setIsOpen(!isOpen)}>{nav}</S.Nav>
