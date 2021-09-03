@@ -12,7 +12,13 @@ export type CartDropdownProps = {
 const CartDropdown = ({ items, total }: CartDropdownProps) => (
   <S.Wrapper>
     <Dropdown nav={<CartIcon quantity={items.length} />}>
-      <CartList hasButton items={items} total={total} />
+      {items.length ? (
+        <CartList hasButton items={items} total={total} />
+      ) : (
+        <S.Empty>
+          <h2>Your cart is empty</h2>
+        </S.Empty>
+      )}
     </Dropdown>
   </S.Wrapper>
 )

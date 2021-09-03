@@ -18,4 +18,11 @@ describe('<CartDropdown />', () => {
     expect(screen.getByText('R$ 350,00')).toBeInTheDocument()
     expect(screen.getByText(`${items[0].title}`)).toBeInTheDocument()
   })
+
+  it('should render the empty text', () => {
+    renderWithTheme(<CartDropdown items={[]} total={''} />)
+
+    expect(screen.queryByText(/buy now/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
+  })
 })
