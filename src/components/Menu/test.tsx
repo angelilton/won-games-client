@@ -10,14 +10,14 @@ describe('<Menu />', () => {
     expect(screen.getByRole('img', { name: /won games/i })).toBeInTheDocument()
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/search/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/open shopping cart/i)).toBeInTheDocument()
+    expect(screen.getAllByLabelText(/Shopping cart/i)).toHaveLength(2)
   })
 
   it('should handle the open/close mobile Menu', () => {
     renderWithTheme(<Menu />)
 
     // selecionar o nosso MenuFull
-    const fullMenuElement = screen.getByRole('navigation', { hidden: true })
+    const fullMenuElement = screen.getByLabelText(/mobile menu/i)
 
     // verificar se o menu tá escondido
     expect(fullMenuElement.getAttribute('aria-hidden')).toBe('true')
@@ -37,18 +37,18 @@ describe('<Menu />', () => {
   it('should show register box when logged out', () => {
     renderWithTheme(<Menu />)
 
-    expect(screen.getByText(/log in now/i)).toBeInTheDocument()
     expect(screen.getByText(/sign up/i)).toBeInTheDocument()
+    expect(screen.getByText(/log in now/i)).toBeInTheDocument()
 
-    expect(screen.queryByText(/my account/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/my profile/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/wishlist/i)).not.toBeInTheDocument()
   })
 
-  it('should show wishLight and account when logged in', () => {
+  it('should show wishLight and profile when logged in', () => {
     renderWithTheme(<Menu username="angel" />)
 
-    expect(screen.getByText(/my account/i)).toBeInTheDocument()
-    expect(screen.getByText(/wishlist/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/my profile/i)).toHaveLength(2)
+    expect(screen.getAllByText(/wishlist/i)).toHaveLength(2)
 
     expect(screen.queryByText(/log in now/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/sign up/i)).not.toBeInTheDocument()

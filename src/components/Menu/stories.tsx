@@ -6,7 +6,11 @@ export default {
   component: Menu
 } as Meta
 
-export const Default: Story<MenuProps> = (args) => <Menu {...args} />
+export const Default: Story<MenuProps> = (args) => (
+  <div style={{ maxWidth: '98%', display: 'flex', justifyContent: 'flex-end' }}>
+    <Menu {...args} />
+  </div>
+)
 
 Default.parameters = {
   layout: 'fullscreen',
