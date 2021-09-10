@@ -5,18 +5,18 @@ import { OrderItemProps } from 'components/OrderItem'
 import * as S from './styles'
 
 export type CartDropdownProps = {
-  items: OrderItemProps[]
-  total: string
+  items?: OrderItemProps[]
+  total?: string
 }
 
-const CartDropdown = ({ items, total }: CartDropdownProps) => (
+const CartDropdown = ({ items = [], total = 'free' }: CartDropdownProps) => (
   <S.Wrapper>
     <Dropdown nav={<CartIcon quantity={items.length} />}>
       {items.length ? (
         <CartList hasButton items={items} total={total} />
       ) : (
         <S.Empty>
-          <h2>Your cart is empty</h2>
+          <h3>Your cart is empty</h3>
         </S.Empty>
       )}
     </Dropdown>

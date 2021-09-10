@@ -10,10 +10,7 @@ export const Wrapper = styled.div`
 
 export const Empty = styled.div`
   ${({ theme }) => css`
-    display: flex;
-    justify-self: center;
     text-align: center;
-
     width: 20rem;
     margin: ${theme.spacings.large};
     color: ${theme.colors.primary};
