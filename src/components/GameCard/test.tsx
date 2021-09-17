@@ -5,7 +5,8 @@ import GameCard from '.'
 
 const props = {
   title: 'Population Zero',
-  developer: 'Rockstar Games',
+  slug: 'population-zero',
+  developer: 'RockStar Games',
   img: 'cardGames.png',
   price: 'R$ 235,00'
 }
@@ -22,7 +23,7 @@ describe('<GameCard />', () => {
 
     //verifiquem se o developer e renderizado
     expect(
-      screen.getByRole('heading', { name: /Rockstar Games/i })
+      screen.getByRole('heading', { name: /RockStar Games/i })
     ).toBeInTheDocument()
 
     //verifiquem se a imagem e renderizado
