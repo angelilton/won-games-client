@@ -12,7 +12,7 @@
     "generate": "yarn plop --plopfile generators/plopfile.js",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook -s ./public",
-    "schema:convert": "node ./util/convertToNonNull.js",
+    "schema:convert": "node convertToNonNull.js",
     "schema:download": "apollo client:download-schema --endpoint=http://localhost:1337/graphql schema-temp.gql",
     "codegen": "apollo codegen:generate --target typescript --excludes=node_modules/ --includes=src/graphql/**/*.ts --localSchemaFile schema.gql --tagName=gql --outputFlat src/graphql/generated",
     "types:generate": "yarn schema:download && yarn schema:convert && yarn codegen"
@@ -31,11 +31,11 @@
   "dependencies": {
     "@apollo/client": "^3.4.10",
     "graphql": "^15.5.3",
-    "next": "9.5.3",
+    "next": "^11.1.2",
     "next-pwa": "^3.1.4",
     "polished": "^4.1.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-slick": "^0.28.1",
     "styled-components": "5.2.0",
     "styled-icons": "^10.22.0",
