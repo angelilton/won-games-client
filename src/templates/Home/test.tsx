@@ -15,7 +15,6 @@ const props = {
   mostPopularCards: cardsMock,
   upcomingCards: cardsMock,
   upcomingHighLight: highlightMock,
-  upcomingMoreCards: cardsMock,
   freeCards: cardsMock,
   freeHighLight: highlightMock
 }
@@ -43,6 +42,6 @@ describe('<Home />', () => {
     renderWithTheme(<Home {...props} />)
 
     expect(screen.getByTestId('Mock Banner Slider')).toBeInTheDocument()
-    expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(5)
+    expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(4)
   })
 })

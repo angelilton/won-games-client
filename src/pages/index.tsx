@@ -50,9 +50,8 @@ export async function getStaticProps() {
       })),
       mostPopularHighLight: highlightMock,
       mostPopularCards: cardsMock,
-      upcommingCards: cardsMock,
-      upcommingHighLight: highlightMock,
-      upcommingMoreCards: cardsMock,
+      upcomingCards: cardsMock,
+      upcomingHighLight: highlightMock,
       freeCards: cardsMock,
       freeHighLight: highlightMock
     }
