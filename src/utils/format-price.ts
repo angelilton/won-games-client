@@ -1,6 +1,10 @@
 export default function formatPrice(price: number | bigint): string {
-  return new Intl.NumberFormat('en', {
-    style: 'currency',
-    currency: 'USD'
-  }).format(price)
+  if (price <= 0) {
+    return 'FREE'
+  } else {
+    return new Intl.NumberFormat('en', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price)
+  }
 }
