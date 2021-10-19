@@ -12,7 +12,8 @@ export const Wrapper = styled.article`
 `
 
 export const ImageBox = styled.a`
-  height: 14rem;
+  min-height: 14rem;
+  position: relative;
   width: 100%;
   background: #f6f7f8;
   background-size: 80rem 14rem;
@@ -98,6 +99,21 @@ export const BuyBox = styled.div`
   `}
 `
 
+const priceModifiers = {
+  default: (theme: DefaultTheme) => css`
+    color: ${theme.colors.white};
+    padding: 0 ${theme.spacings.xxsmall};
+    background-color: ${theme.colors.secondary};
+    border-radius: ${theme.border.radius};
+    margin-right: calc(${theme.spacings.xxsmall} / 2);
+  `,
+  promotional: (theme: DefaultTheme) => css`
+    color: ${theme.colors.gray};
+    text-decoration: line-through;
+    margin-right: ${theme.spacings.xxsmall};
+  `
+}
+
 type PriceProps = {
   isPromotional?: boolean
 }
@@ -113,18 +129,3 @@ export const Price = styled.div<PriceProps>`
     ${isPromotional && priceModifiers.promotional(theme)}
   `}
 `
-
-const priceModifiers = {
-  default: (theme: DefaultTheme) => css`
-    color: ${theme.colors.white};
-    padding: 0 ${theme.spacings.xxsmall};
-    background-color: ${theme.colors.secondary};
-    border-radius: ${theme.border.radius};
-    margin-right: calc(${theme.spacings.xxsmall} / 2);
-  `,
-  promotional: (theme: DefaultTheme) => css`
-    color: ${theme.colors.gray};
-    text-decoration: line-through;
-    margin-right: ${theme.spacings.xxsmall};
-  `
-}

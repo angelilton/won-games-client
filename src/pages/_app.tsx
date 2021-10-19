@@ -22,6 +22,7 @@ function App({ Component, pageProps }: AppProps) {
             name="description"
             content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
           />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <GlobalStyles />
         <Component {...pageProps} />
