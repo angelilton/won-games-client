@@ -24,47 +24,48 @@ export async function getStaticProps() {
   const {
     data: { banners, newGames, upComingGames, freeGames }
   } = await apolloClient.query<QueryHome>({ query: QUERY_HOME })
-  console.log(freeGames)
 
   // retorno dos dados
   return {
     props: {
       revalidate: 60,
-      banners: banners.map((banner) => ({
-        img: banner.image?.url,
-        title: banner.title,
-        subtitle: banner.subtitle,
-        buttonLabel: banner.button?.label,
-        buttonLink: banner.button?.link,
-        ...(banner.ribbon && {
-          ribbon: banner.ribbon?.text,
-          ribbonColor: banner.ribbon?.color,
-          ribbonSize: banner.ribbon?.size
+      banners: banners.map(({ image, title, subtitle, button, ribbon }) => ({
+        title,
+        subtitle,
+        img: image?.url,
+        buttonLabel: button?.label,
+        buttonLink: button?.link,
+        ...(ribbon && {
+          ribbon: ribbon?.text,
+          ribbonColor: ribbon?.color,
+          ribbonSize: ribbon?.size
         })
       })),
-      newGames: newGames.map((card) => ({
-        tittle: card.name,
-        slug: card.slug,
-        developer: card.developers[0].name,
-        img: card.cover?.url,
-        price: card.price
+      newGames: newGames.map(({ name, slug, developers, cover, price }) => ({
+        slug,
+        price,
+        tittle: name,
+        developer: developers[0].name,
+        img: `http://localhost:1337${cover?.url}`
       })),
       mostPopularHighLight: highlightMock,
       mostPopularCards: cardsMock,
-      upcomingCards: upComingGames.map((card) => ({
-        title: card.name,
-        slug: card.slug,
-        developer: card.developers[0].name,
-        img: card.cover?.url,
-        price: card.price
-      })),
+      upcomingCards: upComingGames.map(
+        ({ name, slug, developers, cover, price }) => ({
+          slug,
+          price,
+          title: name,
+          developer: developers[0].name,
+          img: `http://localhost:1337${cover?.url}`
+        })
+      ),
       upcomingHighLight: highlightMock,
-      freeCards: freeGames.map((card) => ({
-        title: card.name,
-        slug: card.slug,
-        developer: card.developers[0].name,
-        img: card.cover?.url,
-        price: card.price
+      freeCards: freeGames.map(({ name, slug, developers, cover, price }) => ({
+        slug,
+        price,
+        title: name,
+        developer: developers[0].name,
+        img: `http://localhost:1337${cover?.url}`
       })),
       freeHighLight: highlightMock
     }

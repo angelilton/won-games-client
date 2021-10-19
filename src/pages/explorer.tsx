@@ -24,12 +24,12 @@ export async function getStaticProps() {
   return {
     props: {
       revalidate: 60,
-      games: data.games.map((game) => ({
-        title: game.name,
-        slug: game.slug,
-        developer: game.developers[0].name,
-        img: game.cover!.url,
-        price: game.price
+      games: data.games.map(({ name, slug, developers, cover, price }) => ({
+        slug,
+        price,
+        title: name,
+        developer: developers[0].name,
+        img: `http://localhost:1337${cover?.url}`
       })),
       filterItems: filterItemsMock
     }
