@@ -2,9 +2,9 @@ import { initializeApollo } from 'utils/apollo'
 
 import Home, { HomeTempleteProps } from 'templates/Home'
 
-import highlightMock from 'components/Highlight/mock'
 import { QUERY_HOME } from 'graphql/queries/home'
 import { QueryHome, QueryHomeVariables } from 'graphql/generated/QueryHome'
+import { bannerMapper, gamesMapper, highlightMapper } from 'utils/mappers'
 
 export default function Index(props: HomeTempleteProps) {
   return <Home {...props} />
@@ -19,7 +19,7 @@ export default function Index(props: HomeTempleteProps) {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
-  const TODAY = new Date().toISOString().slice(0, 10) //'2021-10-02
+  const TODAY = '2021-09-09' // new Date().toISOString().slice(0, 10)
 
   const {
     data: { banners, newGames, upComingGames, freeGames, sections }
@@ -32,53 +32,14 @@ export async function getStaticProps() {
   return {
     props: {
       revalidate: 60,
-      banners: banners.map(({ image, title, subtitle, button, ribbon }) => ({
-        title,
-        subtitle,
-        img: image?.url,
-        buttonLabel: button?.label,
-        buttonLink: button?.link,
-        ...(ribbon && {
-          ribbon: ribbon?.text,
-          ribbonColor: ribbon?.color,
-          ribbonSize: ribbon?.size
-        })
-      })),
-      newGames: newGames.map(({ name, slug, developers, cover, price }) => ({
-        slug,
-        price,
-        tittle: name,
-        developer: developers[0].name,
-        img: `http://localhost:1337${cover?.url}`
-      })),
-      mostPopularHighLight: highlightMock,
-      mostPopularCards: sections?.popularGames?.games.map(
-        ({ name, slug, developers, cover, price }) => ({
-          slug,
-          price,
-          title: name,
-          developer: developers[0].name,
-          img: `http://localhost:1337${cover?.url}`
-        })
-      ),
-      upcomingCards: upComingGames.map(
-        ({ name, slug, developers, cover, price }) => ({
-          slug,
-          price,
-          title: name,
-          developer: developers[0].name,
-          img: `http://localhost:1337${cover?.url}`
-        })
-      ),
-      upcomingHighLight: highlightMock,
-      freeCards: freeGames.map(({ name, slug, developers, cover, price }) => ({
-        slug,
-        price,
-        title: name,
-        developer: developers[0].name,
-        img: `http://localhost:1337${cover?.url}`
-      })),
-      freeHighLight: highlightMock
+      banners: bannerMapper(banners),
+      newGames: gamesMapper(newGames),
+      mostPopularHighLight: highlightMapper(sections?.popularGames?.highlight),
+      mostPopularCards: gamesMapper(sections!.popularGames!.games),
+      upcomingCards: gamesMapper(upComingGames),
+      upcomingHighLight: highlightMapper(sections?.upcomingGames?.highlight),
+      freeCards: gamesMapper(freeGames),
+      freeHighLight: highlightMapper(sections?.freeGames?.highlight)
     }
   }
 }
