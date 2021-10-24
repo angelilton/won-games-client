@@ -2,7 +2,6 @@ import { initializeApollo } from 'utils/apollo'
 
 import Home, { HomeTempleteProps } from 'templates/Home'
 
-import cardsMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import { QUERY_HOME } from 'graphql/queries/home'
 import { QueryHome } from 'graphql/generated/QueryHome'
@@ -22,7 +21,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
   const {
-    data: { banners, newGames, upComingGames, freeGames }
+    data: { banners, newGames, upComingGames, freeGames, sections }
   } = await apolloClient.query<QueryHome>({ query: QUERY_HOME })
 
   // retorno dos dados
@@ -49,7 +48,15 @@ export async function getStaticProps() {
         img: `http://localhost:1337${cover?.url}`
       })),
       mostPopularHighLight: highlightMock,
-      mostPopularCards: cardsMock,
+      mostPopularCards: sections?.popularGames?.games.map(
+        ({ name, slug, developers, cover, price }) => ({
+          slug,
+          price,
+          title: name,
+          developer: developers[0].name,
+          img: `http://localhost:1337${cover?.url}`
+        })
+      ),
       upcomingCards: upComingGames.map(
         ({ name, slug, developers, cover, price }) => ({
           slug,
