@@ -1,5 +1,4 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import BannerSlider from '.'
@@ -27,23 +26,5 @@ describe('<BannerSlider />', () => {
     const { container } = renderWithTheme(<BannerSlider items={items} />)
 
     expect(container.querySelector('.slick-vertical')).toBeInTheDocument()
-  })
-
-  it('should render with 1 active item', () => {
-    renderWithTheme(<BannerSlider items={items} />)
-
-    expect(
-      screen.getByRole('heading', {
-        name: /defy death 1/i,
-        hidden: false
-      })
-    ).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('heading', {
-        name: /defy death 2/i,
-        hidden: true
-      })
-    ).toBeInTheDocument()
   })
 })

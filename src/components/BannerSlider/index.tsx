@@ -11,7 +11,10 @@ const settings: SliderSettings = {
   arrows: false,
   vertical: true,
   verticalSwiping: true,
-  infinite: false,
+  infinite: true,
+  speed: 2000,
+  autoplay: true,
+  autoplaySpeed: 10000,
   responsive: [
     {
       breakpoint: 1170,
