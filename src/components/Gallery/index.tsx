@@ -82,7 +82,7 @@ const Gallery = ({ items }: GalleryProps) => {
         {items.map((item, index) => (
           <img
             role="button"
-            src={item.src}
+            src={`http://localhost:1337${item.src}`}
             alt={`Thumb - ${item.label}`}
             key={`thumb-${index}`}
             onClick={() => {
@@ -103,7 +103,11 @@ const Gallery = ({ items }: GalleryProps) => {
         <S.Content>
           <Slider ref={slider} settings={modalSettings}>
             {items.map((item, index) => (
-              <img src={item.src} alt={item.label} key={`gallery-${index}`} />
+              <img
+                src={`http://localhost:1337${item.src}`}
+                alt={item.label}
+                key={`gallery-${index}`}
+              />
             ))}
           </Slider>
         </S.Content>
