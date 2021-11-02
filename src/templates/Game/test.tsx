@@ -16,6 +16,7 @@ const props: GameTemplateProps = {
   gallery: galleryMock,
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
+  recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock,
   details: gameDetailsMock as GameDetailsProps,
   description: `<h1>Custom HTML</h1>`
@@ -88,7 +89,7 @@ describe('<Game />', () => {
     const cover = screen.getByRole('image', { name: /cover/i })
 
     expect(cover).toHaveStyle({
-      backgroundImage: 'url(bgImage.jpg)',
+      backgroundImage: 'url(http://localhost:1337bgImage.jpg)',
       height: '39.5rem'
     })
 
