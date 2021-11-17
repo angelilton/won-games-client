@@ -16,21 +16,15 @@ export default function index(props: ExploreTempleteProps) {
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query<QueryGames, QueryGamesVariables>({
+  await apolloClient.query<QueryGames, QueryGamesVariables>({
     query: QUERY_GAMES,
-    variables: { limit: 9 }
+    variables: { limit: 15 }
   })
 
   return {
     props: {
       revalidate: 60,
-      games: data.games.map(({ name, slug, developers, cover, price }) => ({
-        slug,
-        price,
-        title: name,
-        developer: developers[0].name,
-        img: `http://localhost:1337${cover?.url}`
-      })),
+      initialApolloState: apolloClient.cache.extract(),
       filterItems: filterItemsMock
     }
   }
