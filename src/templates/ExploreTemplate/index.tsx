@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/client'
-import { QUERY_GAMES } from 'graphql/queries/games'
-import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames'
+import { useQueryGames } from 'graphql/queries/games'
 
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import GameCard, { GameCardProps } from 'components/GameCard'
@@ -16,12 +14,7 @@ export type ExploreTempleteProps = {
 }
 
 const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
-  const { data, loading, fetchMore } = useQuery<
-    QueryGames,
-    QueryGamesVariables
-  >(QUERY_GAMES, {
-    variables: { limit: 15 }
-  })
+  const { data, loading, fetchMore } = useQueryGames()
 
   const handleShowMore = () => {
     fetchMore({
