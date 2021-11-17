@@ -16,12 +16,18 @@ export type ExploreTempleteProps = {
 }
 
 const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
-  const { data, loading } = useQuery<QueryGames, QueryGamesVariables>(
-    QUERY_GAMES,
-    {
-      variables: { limit: 15 }
-    }
-  )
+  const { data, loading, fetchMore } = useQuery<
+    QueryGames,
+    QueryGamesVariables
+  >(QUERY_GAMES, {
+    variables: { limit: 15 }
+  })
+
+  const handleShowMore = () => {
+    fetchMore({
+      variables: { limit: 9, start: data?.games.length }
+    })
+  }
 
   return (
     <Base>
@@ -48,7 +54,7 @@ const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
               ))}
             </Grid>
 
-            <S.ShowMore role="button">
+            <S.ShowMore role="button" onClick={handleShowMore}>
               <p>show more</p>
               <KeyboardArrowDown size={35} />
             </S.ShowMore>
