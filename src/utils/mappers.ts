@@ -4,11 +4,13 @@ import {
   QueryHome_sections_freeGames_highlight
 } from 'graphql/generated/QueryHome'
 
+import getImageUrl from './getImageUrl'
+
 export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map(({ image, title, subtitle, button, ribbon }) => ({
     title,
     subtitle,
-    img: image?.url,
+    img: getImageUrl(image?.url),
     buttonLabel: button?.label,
     buttonLink: button?.link,
     ...(ribbon && {
@@ -27,7 +29,7 @@ export const gamesMapper = (games: QueryGames_games[] | null | undefined) => {
       price,
       tittle: name,
       developer: developers[0].name,
-      img: `http://localhost:1337${cover?.url}`
+      img: getImageUrl(cover?.url)
     }))
   )
 }
