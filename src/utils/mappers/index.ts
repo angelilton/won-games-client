@@ -9,7 +9,7 @@ export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map(({ image, title, subtitle, button, ribbon }) => ({
     title,
     subtitle,
-    img: getImageUrl(image?.url),
+    img: image?.url,
     buttonLabel: button?.label,
     buttonLink: button?.link,
     ...(ribbon && {
@@ -22,7 +22,8 @@ export const bannerMapper = (banners: QueryHome_banners[]) => {
 
 export const gamesMapper = (games: QueryGames_games[] | null | undefined) => {
   return games
-    ? games.map(({ name, slug, developers, cover, price }) => ({
+    ? games.map(({ id, name, slug, developers, cover, price }) => ({
+        id,
         slug,
         price,
         title: name,
