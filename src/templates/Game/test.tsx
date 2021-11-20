@@ -11,7 +11,7 @@ import gameDetailsMock from 'components/GameDetails/mock'
 import { GameDetailsProps } from 'components/GameDetails'
 
 const props: GameTemplateProps = {
-  cover: 'bgImage.jpg',
+  cover: '/bgImage.jpg',
   gameInfo: gameInfoMock,
   gallery: galleryMock,
   upcomingGames: gamesMock,
@@ -90,7 +90,7 @@ describe('<Game />', () => {
     const cover = screen.getByRole('image', { name: /cover/i })
 
     expect(cover).toHaveStyle({
-      backgroundImage: 'url(http://localhost:1337bgImage.jpg)',
+      backgroundImage: 'url(/bgImage.jpg)',
       height: '39.5rem'
     })
 
