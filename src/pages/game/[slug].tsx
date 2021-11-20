@@ -1,23 +1,25 @@
 import { useRouter } from 'next/router'
 import { GetStaticProps } from 'next'
 import { initializeApollo } from 'utils/apollo'
+
+import { QUERY_GAMES, QUERY_GAME_BY_SLUG } from 'graphql/queries/games'
+import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
+import { QUERY_UPCOMING } from 'graphql/queries/upcoming'
+import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames'
 import {
   QueryGameBySlug,
   QueryGameBySlugVariables
 } from 'graphql/generated/QueryGameBySlug'
-import { QUERY_GAMES, QUERY_GAME_BY_SLUG } from 'graphql/queries/games'
-import { QueryRecommended } from 'graphql/generated/QueryRecommended'
-import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
-
-import { gamesMapper, highlightMapper } from 'utils/mappers'
-
-import Game, { GameTemplateProps } from 'templates/Game'
 import {
   QueryUpcoming,
   QueryUpcomingVariables
 } from 'graphql/generated/QueryUpcoming'
-import { QUERY_UPCOMING } from 'graphql/queries/upcoming'
+
+import { gamesMapper, highlightMapper } from 'utils/mappers'
+import getImageUrl from 'utils/getImageUrl'
+
+import Game, { GameTemplateProps } from 'templates/Game'
 
 const apolloClient = initializeApollo()
 
@@ -79,14 +81,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     revalidate: 60,
     props: {
-      cover: game.cover?.src,
+      cover: getImageUrl(game.cover?.src),
       gameInfo: {
         title: game.name,
         price: game.price,
         description: game.short_description
       },
       gallery: game.gallery.map((img) => ({
-        src: img.src,
+        src: getImageUrl(img.src),
         label: img.label
       })),
       description: game.description,

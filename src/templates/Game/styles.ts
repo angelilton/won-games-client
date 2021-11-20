@@ -22,7 +22,7 @@ export const Cover = styled.div<CoverProps>`
       right: 0;
       left: 0;
       position: absolute;
-      background-image: url(${`http://localhost:1337${src}`});
+      background-image: url(${src});
       background-size: cover;
       background-position: 75% center;
       opacity: 0.4;

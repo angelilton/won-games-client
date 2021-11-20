@@ -7,6 +7,7 @@ import Base from 'templates/Base'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 
 import * as S from './styles'
+import getImageUrl from 'utils/getImageUrl'
 
 export type ExploreTempleteProps = {
   filterItems: ItemProps[]
@@ -41,7 +42,7 @@ const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
                   key={item.slug}
                   title={item.name}
                   developer={item.developers[0].name}
-                  img={`http://localhost:1337${item.cover!.url}`}
+                  img={`${getImageUrl(item.cover!.url)}`}
                   {...item}
                 />
               ))}
