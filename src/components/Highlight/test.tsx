@@ -28,16 +28,19 @@ describe('<Highlight />', () => {
   })
 
   it('should render background image', () => {
-    const { container } = renderWithTheme(<Highlight {...props} />)
+    renderWithTheme(<Highlight {...props} />)
 
-    expect(container.firstChild).toHaveStyle({
-      backgroundImage: `url(${props.backgroundImage})`
-    })
+    expect(
+      screen.getByRole('img', { name: `${props.title}-background` })
+    ).toHaveAttribute('src', `${props.backgroundImage}`)
   })
 
   it('should render the float image', () => {
     renderWithTheme(<Highlight {...props} floatImage="/float-image.png" />)
-    expect(screen.getByRole('img')).toHaveAttribute('src', '/float-image.png')
+    expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
+      'src',
+      '/float-image.png'
+    )
   })
 
   it('should align right by default', () => {
