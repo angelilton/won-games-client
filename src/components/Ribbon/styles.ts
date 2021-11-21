@@ -41,7 +41,7 @@ const WrapperModifiers = {
   `
 }
 
-export const Wrapper = styled.div<Omit<RibbonProps, 'children'>>`
+export const Wrapper = styled.div<RibbonProps>`
   ${({ theme, color, size }) => css`
     position: absolute;
     top: ${theme.spacings.xsmall};
@@ -49,6 +49,7 @@ export const Wrapper = styled.div<Omit<RibbonProps, 'children'>>`
     align-items: center;
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
+    z-index: ${theme.layers.base};
 
     &::before {
       content: '';
