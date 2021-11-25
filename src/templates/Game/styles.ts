@@ -10,29 +10,22 @@ export const Main = styled.main`
   `}
 `
 
-type CoverProps = {
-  src: string
-}
+export const Cover = styled.div`
+  height: 39.5rem;
+  top: 0;
+  right: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.4;
 
-export const Cover = styled.div<CoverProps>`
-  ${({ src }) =>
-    css`
-      height: 39.5rem;
-      top: 0;
-      right: 0;
-      left: 0;
-      position: absolute;
-      background-image: url(${src});
-      background-size: cover;
-      background-position: 75% center;
-      opacity: 0.4;
+  img {
+    background-position: top center;
+  }
 
-      ${media.greaterThan('medium')`
-      height: 70rem;
-      background-position: top center;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
-      `}
-    `}
+  ${media.greaterThan('medium')`
+    height: 70rem;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+  `}
 `
 
 const Section = styled(Container).attrs({ as: 'section' })`

@@ -1,5 +1,6 @@
-import Base from 'templates/Base'
+import Image from 'next/image'
 
+import Base from 'templates/Base'
 import TextContent from 'components/TextContent'
 import GameInfo, { GameInfoProps } from 'components/GameInfo'
 import Gallery, { GalleryImgProps } from 'components/Gallery'
@@ -37,8 +38,9 @@ const Game = ({
   upcomingHighlight
 }: GameTemplateProps) => (
   <Base>
-    <S.Cover role="image" aria-label="cover" src={cover} />
-
+    <S.Cover>
+      <Image src={cover} alt={gameInfo.title} layout="fill" objectFit="cover" />
+    </S.Cover>
     <S.Main>
       <S.SectionGameInfo>
         <GameInfo {...gameInfo} />
