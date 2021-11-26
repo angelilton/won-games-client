@@ -3,6 +3,7 @@ import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/Arrow
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import Slider, { SliderSettings } from 'components/Slider'
 import { Close } from '@styled-icons/material-outlined/Close'
+import Image from 'next/image'
 
 import SlickSlider from 'react-slick'
 
@@ -80,7 +81,9 @@ const Gallery = ({ items }: GalleryProps) => {
     <S.Wrapper>
       <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
-          <img
+          <Image
+            width={295}
+            height={165}
             role="button"
             src={item.src}
             alt={`Thumb - ${item.label}`}
@@ -103,7 +106,13 @@ const Gallery = ({ items }: GalleryProps) => {
         <S.Content>
           <Slider ref={slider} settings={modalSettings}>
             {items.map((item, index) => (
-              <img src={item.src} alt={item.label} key={`gallery-${index}`} />
+              <Image
+                width={1200}
+                height={675}
+                src={item.src}
+                alt={item.label}
+                key={`gallery-${index}`}
+              />
             ))}
           </Slider>
         </S.Content>

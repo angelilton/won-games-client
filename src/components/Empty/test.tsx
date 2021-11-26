@@ -13,7 +13,7 @@ describe('<Empty />', () => {
     renderWithTheme(<Empty {...props} hasLink />)
 
     expect(
-      screen.getByRole('image', { name: /a gamer playing videogame/i })
+      screen.getByRole('img', { name: /a gamer playing videogame/i })
     ).toHaveAttribute('src', '/img/empty.svg')
 
     expect(
