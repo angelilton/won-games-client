@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Download } from '@styled-icons/boxicons-solid/Download'
 import { CcMastercard, CcVisa } from 'styled-icons/fa-brands'
 
@@ -27,7 +28,7 @@ const OrderItem = ({
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
-        <img src={img} alt={title} />
+        <Image src={img} alt={title} layout="fill" objectFit="cover" />
       </S.ImageBox>
 
       <S.Content>

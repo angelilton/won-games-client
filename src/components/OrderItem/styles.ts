@@ -17,24 +17,11 @@ export const GameContent = styled.div`
 `
 
 export const ImageBox = styled.div`
-  ${({ theme }) => css`
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    flex-shrink: 0;
-    width: 9.6rem;
-    height: 5.6rem;
-    margin-right: 1.2rem;
-
-    ${media.greaterThan('medium')`
-      width: 15rem;
-      height: 7rem;
-      margin-right: ${theme.spacings.xsmall};
-    `}
-  `}
+  position: relative;
+  flex-shrink: 0;
+  min-height: 8rem;
+  min-width: 14rem;
+  margin-right: 1.2rem;
 `
 
 export const Content = styled.div`
