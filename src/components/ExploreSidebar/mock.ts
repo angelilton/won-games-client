@@ -46,8 +46,8 @@ export default [
     ]
   },
   {
-    title: 'System',
-    name: 'system',
+    title: 'platforms',
+    name: 'platforms',
     type: 'checkbox',
     fields: [
       {
