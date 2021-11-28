@@ -84,8 +84,6 @@ describe('<ExploreSidebar />', () => {
       />
     )
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
-
     expect(onFilter).toBeCalledWith({
       platforms: ['windows'],
       sort_by: 'low-to-high'
@@ -101,7 +99,8 @@ describe('<ExploreSidebar />', () => {
     userEvent.click(screen.getByLabelText(/linux/i))
     userEvent.click(screen.getByLabelText(/low to high/i))
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+    // 1st render more 3 click
+    expect(onFilter).toHaveBeenCalledTimes(4)
 
     expect(onFilter).toBeCalledWith({
       platforms: ['windows', 'linux'],
@@ -116,8 +115,6 @@ describe('<ExploreSidebar />', () => {
 
     userEvent.click(screen.getByLabelText(/low to high/i))
     userEvent.click(screen.getByLabelText(/high to low/i))
-
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     expect(onFilter).toBeCalledWith({ sort_by: 'high-to-low' })
   })
