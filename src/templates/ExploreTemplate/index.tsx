@@ -20,7 +20,7 @@ export type ExploreTempleteProps = {
 
 const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
   const { push, query } = useRouter()
-  const { data, loading, fetchMore } = useQueryGames({
+  const { data, loading, fetchMore, previousData } = useQueryGames({
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: 15,
@@ -28,6 +28,8 @@ const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
       sort: query.sort as string | null
     }
   })
+
+  const hasMoreGames = (previousData?.games.length || 0) !== data?.games.length
 
   const handleFilter = (items: ParsedUrlQueryInput) => {
     push({
@@ -69,19 +71,21 @@ const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
                   />
                 ))}
               </Grid>
-              <S.ShowMore>
-                {loading ? (
-                  <S.ShowMoreLoading
-                    src="img/dots.svg"
-                    alt="Loading more games..."
-                  />
-                ) : (
-                  <S.ShowMoreButton role="button" onClick={handleShowMore}>
-                    <p>show more</p>
-                    <KeyboardArrowDown size={35} />
-                  </S.ShowMoreButton>
-                )}
-              </S.ShowMore>
+              {hasMoreGames && (
+                <S.ShowMore>
+                  {loading ? (
+                    <S.ShowMoreLoading
+                      src="img/dots.svg"
+                      alt="Loading more games..."
+                    />
+                  ) : (
+                    <S.ShowMoreButton role="button" onClick={handleShowMore}>
+                      <p>show more</p>
+                      <KeyboardArrowDown size={35} />
+                    </S.ShowMoreButton>
+                  )}
+                </S.ShowMore>
+              )}
             </>
           ) : (
             <Empty
