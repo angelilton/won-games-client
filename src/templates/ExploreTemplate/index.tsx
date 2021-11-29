@@ -1,21 +1,39 @@
 import { useQueryGames } from 'graphql/queries/games'
+import { useRouter } from 'next/router'
 
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
-import GameCard, { GameCardProps } from 'components/GameCard'
+import GameCard from 'components/GameCard'
 import { Grid } from 'components/Grid'
 import Base from 'templates/Base'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 
-import * as S from './styles'
+import { ParsedUrlQueryInput } from 'querystring'
 import getImageUrl from 'utils/getImageUrl'
+import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
+
+import * as S from './styles'
 
 export type ExploreTempleteProps = {
   filterItems: ItemProps[]
-  games?: GameCardProps[]
 }
 
 const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
-  const { data, loading, fetchMore } = useQueryGames()
+  const { push, query } = useRouter()
+  const { data, loading, fetchMore } = useQueryGames({
+    variables: {
+      limit: 15,
+      where: parseQueryStringToWhere({ queryString: query, filterItems }),
+      sort: query.sort as string | null
+    }
+  })
+
+  const handleFilter = (items: ParsedUrlQueryInput) => {
+    push({
+      pathname: '/explorer',
+      query: items
+    })
+    return
+  }
 
   const handleShowMore = () => {
     fetchMore({
@@ -27,10 +45,12 @@ const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
     <Base>
       <S.Main>
         <ExploreSidebar
+          initialValues={parseQueryStringToFilter({
+            queryString: query,
+            filterItems
+          })}
           items={filterItems}
-          onFilter={() => {
-            return
-          }}
+          onFilter={handleFilter}
         />
         {loading ? (
           <p>Loading...</p>
