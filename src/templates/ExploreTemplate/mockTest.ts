@@ -6,7 +6,7 @@ export default new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        games: concatPagination()
+        games: concatPagination(['where', 'sort'])
       }
     }
   }
@@ -14,7 +14,8 @@ export default new InMemoryCache({
 
 export const gamesMock = {
   request: {
-    query: QUERY_GAMES
+    query: QUERY_GAMES,
+    variables: { limit: 15, where: {} }
   },
   result: {
     data: {
@@ -38,7 +39,7 @@ export const gamesMock = {
 export const fetchMoreMock = {
   request: {
     query: QUERY_GAMES,
-    variables: { limit: 9, start: 1 }
+    variables: { limit: 9, where: {}, start: 1 }
   },
   result: {
     data: {
