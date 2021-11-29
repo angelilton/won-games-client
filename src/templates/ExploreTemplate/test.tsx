@@ -33,13 +33,20 @@ jest.mock('templates/Base', () => ({
 }))
 
 describe('<ExploreTemplate />', () => {
-  it('should render loading when starting the template', () => {
+  it('should render empty when no games found', async () => {
     renderWithTheme(
       <MockedProvider mocks={[]} addTypename={false}>
         <ExploreTemplate filterItems={filterItemsMock} />
       </MockedProvider>
     )
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
+
+    expect(
+      await screen.findByRole('img', { name: /A gamer playing videogame/i })
+    ).toBeInTheDocument()
+
+    expect(
+      await screen.findByText(/We didn't find any games with this filter/i)
+    ).toBeInTheDocument()
   })
 
   it('should render the sections', async () => {

@@ -5,6 +5,7 @@ import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import GameCard from 'components/GameCard'
 import { Grid } from 'components/Grid'
 import Base from 'templates/Base'
+import Empty from 'components/Empty'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 
 import { ParsedUrlQueryInput } from 'querystring'
@@ -20,6 +21,7 @@ export type ExploreTempleteProps = {
 const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
   const { push, query } = useRouter()
   const { data, loading, fetchMore } = useQueryGames({
+    notifyOnNetworkStatusChange: true,
     variables: {
       limit: 15,
       where: parseQueryStringToWhere({ queryString: query, filterItems }),
@@ -52,28 +54,42 @@ const ExploreTemplate = ({ filterItems }: ExploreTempleteProps) => {
           items={filterItems}
           onFilter={handleFilter}
         />
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <section>
-            <Grid>
-              {data?.games.map((item) => (
-                <GameCard
-                  key={item.slug}
-                  title={item.name}
-                  developer={item.developers[0].name}
-                  img={`${getImageUrl(item.cover!.url)}`}
-                  {...item}
-                />
-              ))}
-            </Grid>
 
-            <S.ShowMore role="button" onClick={handleShowMore}>
-              <p>show more</p>
-              <KeyboardArrowDown size={35} />
-            </S.ShowMore>
-          </section>
-        )}
+        <section>
+          {data?.games.length ? (
+            <>
+              <Grid>
+                {data?.games.map((item) => (
+                  <GameCard
+                    key={item.slug}
+                    title={item.name}
+                    developer={item.developers[0].name}
+                    img={`${getImageUrl(item.cover!.url)}`}
+                    {...item}
+                  />
+                ))}
+              </Grid>
+              <S.ShowMore>
+                {loading ? (
+                  <S.ShowMoreLoading
+                    src="img/dots.svg"
+                    alt="Loading more games..."
+                  />
+                ) : (
+                  <S.ShowMoreButton role="button" onClick={handleShowMore}>
+                    <p>show more</p>
+                    <KeyboardArrowDown size={35} />
+                  </S.ShowMoreButton>
+                )}
+              </S.ShowMore>
+            </>
+          ) : (
+            <Empty
+              title="try again"
+              description="We didn't find any games with this filter"
+            />
+          )}
+        </section>
       </S.Main>
     </Base>
   )
