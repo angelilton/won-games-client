@@ -8,6 +8,19 @@ export const Nav = styled.nav`
     display: flex;
     align-items: center;
     padding-right: 2.4rem;
+    z-index: ${theme.layers.modal};
+  `}
+`
+
+export const Overlay = styled.div`
+  ${({ theme }) => css`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: ${theme.layers.overlay};
   `}
 `
 
@@ -20,6 +33,9 @@ export const Content = styled.div`
     margin-top: ${theme.spacings.small};
     position: absolute;
     right: 0;
+    z-index: ${theme.layers.modal};
+
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     &::before {
       content: '';
@@ -54,7 +70,8 @@ export const Wrapper = styled.div<WrapperProps>`
     position: relative;
     width: max-content;
 
-    ${Content} {
+    ${Content},
+    ${Overlay} {
       transition: transform 0.2s ease-in, opacity ${theme.transition.default};
 
       ${isOpen && WrapperModifier.open()}

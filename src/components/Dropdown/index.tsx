@@ -13,6 +13,7 @@ const Dropdown = ({ nav, children }: DropdownProps) => {
     <S.Wrapper isOpen={isOpen}>
       <S.Nav onClick={() => setIsOpen(!isOpen)}>{nav}</S.Nav>
       <S.Content aria-hidden={!isOpen}>{children}</S.Content>
+      <S.Overlay aria-hidden={!isOpen} onClick={() => setIsOpen(!isOpen)} />
     </S.Wrapper>
   )
 }
