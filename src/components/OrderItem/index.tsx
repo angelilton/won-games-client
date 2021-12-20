@@ -11,7 +11,7 @@ export type PaymentInfoProps = {
 }
 
 export type OrderItemProps = {
-  img: string
+  img: string | null
   title: string
   price: string
   downloadLink?: string
@@ -28,7 +28,7 @@ const OrderItem = ({
   <S.Wrapper>
     <S.GameContent>
       <S.ImageBox>
-        <Image src={img} alt={title} layout="fill" objectFit="cover" />
+        <Image src={img} alt={title} width={150} height={70} />
       </S.ImageBox>
 
       <S.Content>

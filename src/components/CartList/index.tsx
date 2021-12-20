@@ -1,33 +1,32 @@
 import Link from 'next/link'
-import OrderItem, { OrderItemProps } from 'components/OrderItem'
-
-import * as S from './styles'
+import { useCart } from 'hooks/use-cart'
+import OrderItem from 'components/OrderItem'
 import Button from 'components/Button'
 
-export type CartListProps = {
-  items: OrderItemProps[]
-  total: string
-  hasButton?: boolean
+import * as S from './styles'
+
+const CartList = ({ hasButton = false }) => {
+  const { total, items } = useCart()
+
+  return (
+    <S.Wrapper>
+      {items.map((item) => (
+        <OrderItem key={item.title} {...item} />
+      ))}
+
+      <S.Footer>
+        {!hasButton && <span>Total:</span>}
+
+        <S.Total>{total}</S.Total>
+
+        {hasButton && (
+          <Link href="/cart" passHref>
+            <Button>Buy now</Button>
+          </Link>
+        )}
+      </S.Footer>
+    </S.Wrapper>
+  )
 }
-
-const CartList = ({ items, total, hasButton = false }: CartListProps) => (
-  <S.Wrapper>
-    {items.map((item) => (
-      <OrderItem key={item.title} {...item} />
-    ))}
-
-    <S.Footer>
-      {!hasButton && <span>Total:</span>}
-
-      <S.Total>{total}</S.Total>
-
-      {hasButton && (
-        <Link href="/cart" passHref>
-          <Button>Buy now</Button>
-        </Link>
-      )}
-    </S.Footer>
-  </S.Wrapper>
-)
 
 export default CartList
