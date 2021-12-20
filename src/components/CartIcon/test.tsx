@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 import { customRender } from 'utils/test-utils'
 
 import CartIcon from '.'
@@ -12,15 +13,11 @@ describe('<CartIcon />', () => {
   })
 
   it('should render with badge', () => {
-    customRender(<CartIcon quantity={4} />)
+    customRender(<CartIcon />, {
+      cartProviderProps: { ...CartContextDefaultValues, quantity: 4 }
+    })
 
     expect(screen.queryByLabelText(/cart items/i)).toBeInTheDocument()
     expect(screen.getByText(/4/)).toBeInTheDocument()
-  })
-
-  it('should render with badge just if it has positive number', () => {
-    customRender(<CartIcon quantity={-1} />)
-
-    expect(screen.queryByLabelText(/cart items/i)).not.toBeInTheDocument()
   })
 })
