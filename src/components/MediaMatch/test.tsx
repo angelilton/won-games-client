@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react'
 import MediaMatch from '.'
 
 describe('<MediaMatch />', () => {
-  let desktopHeading = Element
-  let mobileHeading = Element
+  let desktopHeading: HTMLElement
+  let mobileHeading: HTMLElement
 
   //hook tests
   beforeEach(() => {

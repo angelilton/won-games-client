@@ -15,9 +15,7 @@ const props = {
 
 describe('<ShowCase />', () => {
   it('should render without title', () => {
-    customRender(
-      <Showcase games={props.games} highlight={props.highlight} />
-    )
+    customRender(<Showcase games={props.games} highlight={props.highlight} />)
 
     expect(
       screen.queryByRole('heading', { name: /my title/i })
@@ -33,9 +31,7 @@ describe('<ShowCase />', () => {
   })
 
   it('should render without games', () => {
-    customRender(
-      <Showcase title={props.title} highlight={props.highlight} />
-    )
+    customRender(<Showcase title={props.title} highlight={props.highlight} />)
 
     expect(
       screen.queryByRole('heading', { name: gamesMock[0].title })
