@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
 
 import items from './mock'
@@ -11,7 +11,7 @@ import ExploreSidebar from '.'
 
 describe('<ExploreSidebar />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn()} />)
+    customRender(<ExploreSidebar items={items} onFilter={jest.fn()} />)
 
     expect(screen.getByRole('heading', { name: /price/i })).toBeInTheDocument()
     expect(
@@ -24,7 +24,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should render inputs and button', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn()} />)
+    customRender(<ExploreSidebar items={items} onFilter={jest.fn()} />)
 
     expect(
       screen.getByRole('checkbox', { name: /under \$50/i })
@@ -38,7 +38,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should open/close sidebar when filtering on mobile', () => {
-    const { container } = renderWithTheme(
+    const { container } = customRender(
       <ExploreSidebar items={items} onFilter={jest.fn()} />
     )
 
@@ -61,7 +61,7 @@ describe('<ExploreSidebar />', () => {
   })
 
   it('should check initial values that are passed', () => {
-    renderWithTheme(
+    customRender(
       <ExploreSidebar
         items={items}
         initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
@@ -76,7 +76,7 @@ describe('<ExploreSidebar />', () => {
   it('should filter with initial values', () => {
     const onFilter = jest.fn()
 
-    renderWithTheme(
+    customRender(
       <ExploreSidebar
         items={items}
         initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
@@ -93,7 +93,7 @@ describe('<ExploreSidebar />', () => {
   it('should filter with checked values', () => {
     const onFilter = jest.fn()
 
-    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
+    customRender(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     userEvent.click(screen.getByLabelText(/windows/i))
     userEvent.click(screen.getByLabelText(/linux/i))
@@ -111,7 +111,7 @@ describe('<ExploreSidebar />', () => {
   it('should shift between radio options', () => {
     const onFilter = jest.fn()
 
-    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
+    customRender(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     userEvent.click(screen.getByLabelText(/low to high/i))
     userEvent.click(screen.getByLabelText(/high to low/i))

@@ -1,6 +1,6 @@
 import 'match-media-mock'
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
@@ -15,7 +15,7 @@ const props = {
 
 describe('<ShowCase />', () => {
   it('should render without title', () => {
-    renderWithTheme(
+    customRender(
       <Showcase games={props.games} highlight={props.highlight} />
     )
 
@@ -25,7 +25,7 @@ describe('<ShowCase />', () => {
   })
 
   it('should render without highlight', () => {
-    renderWithTheme(<Showcase title={props.title} games={props.games} />)
+    customRender(<Showcase title={props.title} games={props.games} />)
 
     expect(
       screen.queryByRole('heading', { name: highlightMock.title })
@@ -33,7 +33,7 @@ describe('<ShowCase />', () => {
   })
 
   it('should render without games', () => {
-    renderWithTheme(
+    customRender(
       <Showcase title={props.title} highlight={props.highlight} />
     )
 
@@ -43,7 +43,7 @@ describe('<ShowCase />', () => {
   })
 
   it('should render full showcase', () => {
-    renderWithTheme(
+    customRender(
       <Showcase
         title={props.title}
         games={props.games}

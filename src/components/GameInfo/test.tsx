@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import GameInfo from '.'
 
@@ -11,7 +11,7 @@ const props = {
 
 describe('<GameInfo />', () => {
   it('should render game information', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    customRender(<GameInfo {...props} />)
 
     expect(screen.getByRole('heading', { name: /my game title/i }))
     expect(screen.getByText(/220.99/i))
@@ -19,7 +19,7 @@ describe('<GameInfo />', () => {
   })
 
   it('should render buttons', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    customRender(<GameInfo {...props} />)
 
     expect(screen.getByRole('button', { name: /add to cart/i }))
     expect(screen.getByRole('button', { name: /wishlist/i }))

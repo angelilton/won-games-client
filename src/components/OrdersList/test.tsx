@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import OrdersList from '.'
 import mock from './mock'
@@ -20,14 +20,14 @@ jest.mock('components/OrderItem', () => ({
 
 describe('<OrdersList />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<OrdersList items={mock} />)
+    customRender(<OrdersList items={mock} />)
 
     expect(screen.getByRole('heading', { name: /my orders/i }))
     expect(screen.getAllByTestId('Mock OrderItem')).toHaveLength(2)
   })
 
   it('should render empty state', () => {
-    renderWithTheme(<OrdersList />)
+    customRender(<OrdersList />)
 
     expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
   })

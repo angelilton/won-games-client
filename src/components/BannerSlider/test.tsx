@@ -1,5 +1,5 @@
 import 'match-media-mock'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import BannerSlider from '.'
 
@@ -23,7 +23,7 @@ const items = [
 
 describe('<BannerSlider />', () => {
   it('should render Vertical slider', () => {
-    const { container } = renderWithTheme(<BannerSlider items={items} />)
+    const { container } = customRender(<BannerSlider items={items} />)
 
     expect(container.querySelector('.slick-vertical')).toBeInTheDocument()
   })

@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import UserDropdown from '.'
 
 describe('<UserDropdown />', () => {
   it('should render UserDropdown  correctly', () => {
-    renderWithTheme(<UserDropdown username="angel" />)
+    customRender(<UserDropdown username="angel" />)
     expect(screen.getByText('angel')).toBeInTheDocument()
 
     expect(screen.getByText('My profile')).toBeInTheDocument()

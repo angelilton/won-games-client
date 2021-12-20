@@ -1,13 +1,13 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import PaymentOptions from '.'
 import cards from './mock'
 
 describe('<PaymentOptions />', () => {
   it('should render the saved card options and the add new card button', () => {
-    renderWithTheme(<PaymentOptions cards={cards} handlePayment={jest.fn} />)
+    customRender(<PaymentOptions cards={cards} handlePayment={jest.fn} />)
 
     expect(screen.getByText(/4325/))
     expect(screen.getByText(/4326/))
@@ -16,7 +16,7 @@ describe('<PaymentOptions />', () => {
 
   it('should not call handlePayment when button is disabled', () => {
     const handlePayment = jest.fn()
-    renderWithTheme(
+    customRender(
       <PaymentOptions cards={cards} handlePayment={handlePayment} />
     )
 
@@ -26,7 +26,7 @@ describe('<PaymentOptions />', () => {
 
   it('should call handlePayment when credit card is selected', async () => {
     const handlePayment = jest.fn()
-    renderWithTheme(
+    customRender(
       <PaymentOptions cards={cards} handlePayment={handlePayment} />
     )
 
@@ -39,7 +39,7 @@ describe('<PaymentOptions />', () => {
   })
 
   it('should select card when clicking on credit card', async () => {
-    renderWithTheme(<PaymentOptions cards={cards} handlePayment={jest.fn} />)
+    customRender(<PaymentOptions cards={cards} handlePayment={jest.fn} />)
 
     userEvent.click(screen.getByText(/4325/))
 

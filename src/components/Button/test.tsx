@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 
 import Button from '.'
 
 describe('<Button />', () => {
   it('should render the medium size by default', () => {
-    renderWithTheme(<Button>Buy Now</Button>)
+    customRender(<Button>Buy Now</Button>)
 
     expect(screen.getByRole('button', { name: /Buy Now/i })).toHaveStyle({
       height: '4rem',
@@ -16,7 +16,7 @@ describe('<Button />', () => {
   })
 
   it('should render the small size', () => {
-    renderWithTheme(<Button size="small">Buy Now</Button>)
+    customRender(<Button size="small">Buy Now</Button>)
 
     expect(screen.getByRole('button', { name: /Buy Now/i })).toHaveStyle({
       height: '3rem',
@@ -26,7 +26,7 @@ describe('<Button />', () => {
   })
 
   it('should render the large size', () => {
-    renderWithTheme(<Button size="large">Buy Now</Button>)
+    customRender(<Button size="large">Buy Now</Button>)
 
     expect(screen.getByRole('button', { name: /Buy Now/i })).toHaveStyle({
       height: '5rem',
@@ -36,7 +36,7 @@ describe('<Button />', () => {
   })
 
   it('should render  a fullWidth version', () => {
-    renderWithTheme(<Button fullWidth>Buy Now</Button>)
+    customRender(<Button fullWidth>Buy Now</Button>)
 
     expect(screen.getByRole('button', { name: /Buy Now/i })).toHaveStyle({
       width: '100%'
@@ -44,7 +44,7 @@ describe('<Button />', () => {
   })
 
   it('should render an icon version', () => {
-    renderWithTheme(
+    customRender(
       <Button icon={<AddShoppingCart data-testid="icon" />}>Buy now</Button>
     )
 
@@ -53,7 +53,7 @@ describe('<Button />', () => {
   })
 
   it('should render a minimal version', () => {
-    renderWithTheme(
+    customRender(
       <Button icon={<AddShoppingCart data-testid="icon" />} minimal>
         buy now
       </Button>
@@ -66,7 +66,7 @@ describe('<Button />', () => {
   })
 
   it('should render a disabled Button', () => {
-    renderWithTheme(<Button disabled>Buy now</Button>)
+    customRender(<Button disabled>Buy now</Button>)
 
     expect(screen.getByRole('button', { name: /Buy now/i })).toHaveStyleRule(
       'cursor',
@@ -78,7 +78,7 @@ describe('<Button />', () => {
   })
 
   it('should render Button as a link', () => {
-    renderWithTheme(
+    customRender(
       <Button as="a" href="/link">
         Buy now
       </Button>

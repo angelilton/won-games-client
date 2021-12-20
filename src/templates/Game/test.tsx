@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Game, { GameTemplateProps } from '.'
 
@@ -53,7 +53,7 @@ jest.mock('components/Showcase', () => ({
 
 describe('<Game />', () => {
   it('should render template with components', () => {
-    renderWithTheme(<Game {...props} />)
+    customRender(<Game {...props} />)
 
     expect(screen.getByTestId('Mock Gallery')).toBeInTheDocument()
     expect(screen.getByTestId('Mock GameDetails')).toBeInTheDocument()
@@ -64,12 +64,12 @@ describe('<Game />', () => {
   })
 
   it('should not render gallery if no images', () => {
-    renderWithTheme(<Game {...props} gallery={undefined} />)
+    customRender(<Game {...props} gallery={undefined} />)
     expect(screen.queryByTestId('Mock Gallery')).not.toBeInTheDocument()
   })
 
   it('should not render gallery if on mobile', () => {
-    renderWithTheme(<Game {...props} />)
+    customRender(<Game {...props} />)
 
     expect(screen.queryByTestId('Mock Gallery')?.parentElement).toHaveStyle({
       display: 'none'
@@ -85,7 +85,7 @@ describe('<Game />', () => {
   })
 
   it('should rende the cover image', () => {
-    renderWithTheme(<Game {...props} />)
+    customRender(<Game {...props} />)
 
     const cover = screen.getByRole('img', { name: /Borderlands 3/i })
       .parentElement

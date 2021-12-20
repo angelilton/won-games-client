@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Empty from '.'
 
@@ -10,7 +10,7 @@ const props = {
 
 describe('<Empty />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<Empty {...props} hasLink />)
+    customRender(<Empty {...props} hasLink />)
 
     expect(
       screen.getByRole('img', { name: /a gamer playing videogame/i })
@@ -28,7 +28,7 @@ describe('<Empty />', () => {
   })
 
   it('should not render link when hasLink is false', () => {
-    renderWithTheme(<Empty {...props} />)
+    customRender(<Empty {...props} />)
 
     expect(
       screen.queryByRole('link', { name: /go back to store/i })

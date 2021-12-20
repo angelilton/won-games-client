@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import { Email } from '@styled-icons/material-outlined'
 
@@ -8,31 +8,31 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should renders with Label', () => {
-    renderWithTheme(<TextField label="Label" name="label" />)
+    customRender(<TextField label="Label" name="label" />)
 
     expect(screen.getByText('Label')).toBeInTheDocument()
   })
 
   it('should renders without Label', () => {
-    renderWithTheme(<TextField />)
+    customRender(<TextField />)
 
     expect(screen.queryByText('Label')).not.toBeInTheDocument()
   })
 
   it('should renders with  placeholder', () => {
-    renderWithTheme(<TextField placeholder="user name" />)
+    customRender(<TextField placeholder="user name" />)
 
     expect(screen.getByPlaceholderText('user name')).toBeInTheDocument()
   })
 
   it('Render with Icon', () => {
-    renderWithTheme(<TextField icon={<Email data-testid="icon" />} />)
+    customRender(<TextField icon={<Email data-testid="icon" />} />)
 
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
   it('Render with Icon on the right side', () => {
-    renderWithTheme(
+    customRender(
       <TextField icon={<Email data-testid="icon" />} iconPosition="right" />
     )
 
@@ -44,7 +44,7 @@ describe('<TextField />', () => {
   it('Changes its value when typing', async () => {
     const onInput = jest.fn()
 
-    renderWithTheme(<TextField label="Label" name="Field" onInput={onInput} />)
+    customRender(<TextField label="Label" name="Field" onInput={onInput} />)
 
     const text = 'this is my text'
     const input = screen.getByRole('textbox')
@@ -61,7 +61,7 @@ describe('<TextField />', () => {
 
   it('Changes its value when typing', async () => {
     const onInput = jest.fn()
-    renderWithTheme(
+    customRender(
       <TextField label="Label" name="Field" onInput={onInput} disabled />
     )
 
@@ -77,7 +77,7 @@ describe('<TextField />', () => {
   })
 
   it('Renders with error', () => {
-    renderWithTheme(
+    customRender(
       <TextField
         label="Label"
         icon={<Email data-testid="icon" />}

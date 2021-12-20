@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import ProfileMenu from '.'
 
 describe('<ProfileMenu />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<ProfileMenu />)
+    customRender(<ProfileMenu />)
 
     expect(
       screen.getByRole('link', { name: /my profile/i })
@@ -17,7 +17,7 @@ describe('<ProfileMenu />', () => {
   })
 
   it('should render the menu with an active link', () => {
-    renderWithTheme(<ProfileMenu activeLink="/profile/orders" />)
+    customRender(<ProfileMenu activeLink="/profile/orders" />)
 
     expect(screen.getByRole('link', { name: /my orders/i })).toHaveStyle({
       color: '#FAFAFA',

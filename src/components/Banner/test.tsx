@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Banner from '.'
 
@@ -13,7 +13,7 @@ const args = {
 
 describe('<Banner />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<Banner {...args} />)
+    customRender(<Banner {...args} />)
 
     // verifique se o title existe renderizado (.toBeInTheDocument())
     expect(
@@ -30,7 +30,7 @@ describe('<Banner />', () => {
   })
 
   it('should render a Ribbon', () => {
-    renderWithTheme(
+    customRender(
       <Banner
         {...args}
         ribbon="my Ribbon"

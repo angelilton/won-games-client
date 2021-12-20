@@ -1,6 +1,6 @@
 import 'match-media-mock'
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Profile from '.'
 
@@ -24,7 +24,7 @@ jest.mock('components/ProfileMenu', () => ({
 
 describe('<Profile />', () => {
   it('should render profile with ProfileMenu and children', () => {
-    renderWithTheme(
+    customRender(
       <Profile>
         <div>cards List</div>
       </Profile>

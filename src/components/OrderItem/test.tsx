@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import CartItem from '.'
 
@@ -11,7 +11,7 @@ const props = {
 
 describe('<CartItem />', () => {
   it('should render the item', () => {
-    renderWithTheme(<CartItem {...props} />)
+    customRender(<CartItem {...props} />)
 
     expect(screen.getByRole('heading', { name: props.title }))
     expect(screen.getByText(props.price))
@@ -21,7 +21,7 @@ describe('<CartItem />', () => {
 
   it('should render the item with download link', () => {
     const downloadLink = 'https://link'
-    renderWithTheme(<CartItem {...props} downloadLink={downloadLink} />)
+    customRender(<CartItem {...props} downloadLink={downloadLink} />)
 
     expect(screen.getByRole('link')).toHaveAttribute('href', downloadLink)
   })
@@ -32,7 +32,7 @@ describe('<CartItem />', () => {
       number: '**** **** **** 4326',
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }
-    renderWithTheme(<CartItem {...props} paymentInfo={paymentInfo} />)
+    customRender(<CartItem {...props} paymentInfo={paymentInfo} />)
 
     expect(screen.getByLabelText('mastercard'))
     expect(screen.getByText(paymentInfo.number))

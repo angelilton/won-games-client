@@ -1,11 +1,11 @@
 import { fireEvent, screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Menu from '.'
 
 describe('<Menu />', () => {
   it('should render the Menu', () => {
-    renderWithTheme(<Menu />)
+    customRender(<Menu />)
 
     expect(screen.getByRole('img', { name: /won games/i })).toBeInTheDocument()
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
@@ -14,7 +14,7 @@ describe('<Menu />', () => {
   })
 
   it('should handle the open/close mobile Menu', () => {
-    renderWithTheme(<Menu />)
+    customRender(<Menu />)
 
     // selecionar o nosso MenuFull
     const fullMenuElement = screen.getByLabelText(/mobile menu/i)
@@ -35,7 +35,7 @@ describe('<Menu />', () => {
   })
 
   it('should show register box when logged out', () => {
-    renderWithTheme(<Menu />)
+    customRender(<Menu />)
 
     expect(screen.getByText(/sign up/i)).toBeInTheDocument()
     expect(screen.getByText(/log in now/i)).toBeInTheDocument()
@@ -45,7 +45,7 @@ describe('<Menu />', () => {
   })
 
   it('should show wishLight and profile when logged in', () => {
-    renderWithTheme(<Menu username="angel" />)
+    customRender(<Menu username="angel" />)
 
     expect(screen.getAllByText(/my profile/i)).toHaveLength(2)
     expect(screen.getAllByText(/wishlist/i)).toHaveLength(2)

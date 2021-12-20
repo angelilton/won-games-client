@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Dropdown from '.'
 
@@ -8,7 +8,7 @@ describe('<Dropdown />', () => {
   beforeEach(() => {
     const title = <h1 aria-label="toggle dropdown">Click here</h1>
 
-    renderWithTheme(
+    customRender(
       <Dropdown nav={title}>
         <span>content</span>
       </Dropdown>

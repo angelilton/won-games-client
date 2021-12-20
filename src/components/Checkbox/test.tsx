@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import userEvent from '@testing-library/user-event'
 
@@ -7,7 +7,7 @@ import Checkbox from '.'
 
 describe('<Checkbox />', () => {
   it('should render with label', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="userName" />)
+    customRender(<Checkbox label="checkbox label" labelFor="userName" />)
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
 
     expect(screen.getByText(/checkbox label/i)).toHaveAttribute(
@@ -20,7 +20,7 @@ describe('<Checkbox />', () => {
   })
 
   it('should render with black label', () => {
-    renderWithTheme(
+    customRender(
       <Checkbox label="checkbox label" labelFor="userName" labelColor="black" />
     )
 
@@ -33,7 +33,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="checkbox" onCheck={onCheck} />)
+    customRender(<Checkbox label="checkbox" onCheck={onCheck} />)
 
     expect(onCheck).not.toHaveBeenCalled()
 
@@ -47,7 +47,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck when isChecked is pass', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
+    customRender(<Checkbox label="Checkbox" onCheck={onCheck} isChecked />)
 
     userEvent.click(screen.getByRole('checkbox'))
     await waitFor(() => {

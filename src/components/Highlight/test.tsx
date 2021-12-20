@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { customRender } from 'utils/test-utils'
 
 import Highlight from '.'
 import * as S from './styles'
@@ -14,7 +14,7 @@ const props = {
 
 describe('<Highlight />', () => {
   it('should render the heading and button', () => {
-    renderWithTheme(<Highlight {...props} />)
+    customRender(<Highlight {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /Heading 1/i })
@@ -28,7 +28,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render background image', () => {
-    renderWithTheme(<Highlight {...props} />)
+    customRender(<Highlight {...props} />)
 
     expect(
       screen.getByRole('img', { name: `${props.title}-background` })
@@ -36,7 +36,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render the float image', () => {
-    renderWithTheme(<Highlight {...props} floatImage="/float-image.png" />)
+    customRender(<Highlight {...props} floatImage="/float-image.png" />)
     expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
       'src',
       '/float-image.png'
@@ -44,7 +44,7 @@ describe('<Highlight />', () => {
   })
 
   it('should align right by default', () => {
-    const { container } = renderWithTheme(<Highlight {...props} />)
+    const { container } = customRender(<Highlight {...props} />)
 
     expect(container.firstChild).toHaveStyleRule(
       'grid-template-areas',
@@ -57,7 +57,7 @@ describe('<Highlight />', () => {
   })
 
   it(`should align left if alignment="left" is set`, () => {
-    const { container } = renderWithTheme(
+    const { container } = customRender(
       <Highlight {...props} alignment="left" />
     )
 
