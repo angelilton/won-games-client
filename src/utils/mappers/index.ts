@@ -10,7 +10,7 @@ export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map(({ image, title, subtitle, button, ribbon }) => ({
     title,
     subtitle,
-    img: image?.url,
+    img: `${getImageUrl(image?.url)}`,
     buttonLabel: button?.label,
     buttonLink: button?.link,
     ...(ribbon && {
@@ -29,7 +29,7 @@ export const gamesMapper = (games: QueryGames_games[] | null | undefined) => {
         title: name,
         price: formatPrice(price),
         developer: developers[0].name,
-        img: getImageUrl(cover?.url)
+        img: `${getImageUrl(cover?.url)}`
       }))
     : []
 }
@@ -42,7 +42,7 @@ export const highlightMapper = (
         title: highlight.title,
         subtitle: highlight.subtitle,
         backgroundImage: highlight.background?.url,
-        floatImage: highlight.floatImage?.url,
+        floatImage: `${getImageUrl(highlight.floatImage?.url)}`,
         buttonLabel: highlight.buttonLabel,
         buttonLink: highlight.buttonLink,
         alignment: highlight.alignment
@@ -56,7 +56,7 @@ export const cartMapper = (games: QueryGames_games[] | undefined) => {
         id,
         title: name,
         price: formatPrice(price),
-        img: getImageUrl(cover?.url)
+        img: `${getImageUrl(cover?.url)}`
       }))
     : []
 }
