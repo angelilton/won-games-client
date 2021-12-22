@@ -4,6 +4,7 @@ import { customRender } from 'utils/test-utils'
 import GameCard from '.'
 
 const props = {
+  id: 'id_01',
   title: 'Population Zero',
   slug: 'population-zero',
   developer: 'RockStar Games',
