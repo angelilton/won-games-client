@@ -1,4 +1,5 @@
 export default {
+  id: 'id_01',
   title: 'Borderlands 3',
   price: 215,
   description:

@@ -4,6 +4,7 @@ import { customRender } from 'utils/test-utils'
 import GameInfo from '.'
 
 const props = {
+  id: 'id_01',
   title: 'my game title',
   description: 'game description',
   price: 220.99
