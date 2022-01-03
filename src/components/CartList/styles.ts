@@ -11,6 +11,11 @@ export const Wrapper = styled.div`
   `}
 `
 
+export const GameList = styled.div`
+  max-height: 40rem;
+  overflow-y: auto;
+`
+
 export const Footer = styled.div`
   ${({ theme }) =>
     css`

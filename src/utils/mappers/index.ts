@@ -10,7 +10,7 @@ export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map(({ image, title, subtitle, button, ribbon }) => ({
     title,
     subtitle,
-    img: `${getImageUrl(image?.url)}`,
+    img: image?.url,
     buttonLabel: button?.label,
     buttonLink: button?.link,
     ...(ribbon && {
@@ -42,7 +42,7 @@ export const highlightMapper = (
         title: highlight.title,
         subtitle: highlight.subtitle,
         backgroundImage: highlight.background?.url,
-        floatImage: `${getImageUrl(highlight.floatImage?.url)}`,
+        floatImage: highlight.floatImage?.url,
         buttonLabel: highlight.buttonLabel,
         buttonLink: highlight.buttonLink,
         alignment: highlight.alignment

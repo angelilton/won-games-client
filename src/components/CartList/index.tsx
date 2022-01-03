@@ -22,10 +22,11 @@ const CartList = ({ hasButton = false }) => {
     <S.Wrapper>
       {items.length ? (
         <>
-          {items.map((item) => (
-            <OrderItem key={item.title} {...item} />
-          ))}
-
+          <S.GameList>
+            {items.map((item) => (
+              <OrderItem key={item.title} {...item} />
+            ))}
+          </S.GameList>
           <S.Footer>
             {!hasButton && <span>Total:</span>}
             <S.Total>{total}</S.Total>
