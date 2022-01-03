@@ -28,6 +28,23 @@ describe('<CartList />', () => {
     }
 
     customRender(<CartList hasButton />, { cartProviderProps })
-    expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+    expect(screen.getByText(/buy it now/i)).toBeInTheDocument()
+  })
+
+  it('should render loading when is searching items', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      loading: true
+    }
+
+    customRender(<CartList />, { cartProviderProps })
+    expect(screen.getByTitle(/loading/i)).toBeInTheDocument()
+  })
+
+  it('should render empty if there are no game', () => {
+    customRender(<CartList />)
+
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
+    expect(screen.queryByText(/total/i)).not.toBeInTheDocument()
   })
 })
