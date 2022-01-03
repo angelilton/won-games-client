@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import formatPrice from 'utils/format-price'
 import CartButton from 'components/CartButton'
 import Ribbon, { RibbonSizes } from 'components/Ribbon'
 import { Favorite, FavoriteBorder } from '@styled-icons/material-outlined'
@@ -67,10 +66,8 @@ const GameCard = ({
       </S.FavButton>
 
       <S.BuyBox>
-        {!!promotionalPrice && (
-          <S.Price isPromotional>{formatPrice(price)}</S.Price>
-        )}
-        <S.Price>{formatPrice(promotionalPrice || price)}</S.Price>
+        {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
+        <S.Price>{price}</S.Price>
         <CartButton id={id} />
       </S.BuyBox>
     </S.Content>
