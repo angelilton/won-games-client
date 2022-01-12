@@ -44,6 +44,13 @@ export const Input = styled.input<IconPositionProps>`
     width: 100%;
     border: 0;
     outline: none;
+
+    //remove auto-fill style by browser default
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 ${theme.spacings.small}
+        ${theme.colors.lightGray} inset;
+      filter: none
+    }
   `}
 `
 export const Icon = styled.div<IconPositionProps>`
