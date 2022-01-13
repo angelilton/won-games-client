@@ -11,14 +11,11 @@ const options: NextAuthOptions = {
       name: 'Sing-in',
       credentials: {},
       async authorize(credentials) {
-        console.log('credencial:', credentials)
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
           {
             method: 'POST',
-            body: new URLSearchParams({
-              identifier: JSON.stringify(credentials)
-            })
+            body: new URLSearchParams(credentials)
           }
         )
 
