@@ -90,3 +90,10 @@ export const Wrapper = styled.button<WrapperProps>`
     ${disabled && wrapperModifiers.disabled()};
   `}
 `
+
+export const ButtonLoading = styled.img.attrs(() => ({
+  src: '/img/dots.svg',
+  alt: 'Waiting...'
+}))`
+  width: 4rem;
+`
