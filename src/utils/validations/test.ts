@@ -3,18 +3,18 @@ import { signInValidate, signUpValidate } from '.'
 describe('validations', () => {
   describe('signInValidate()', () => {
     it('should validate empty fields', () => {
-      const values = { email: '', password: '' }
+      const values = { identifier: '', password: '' }
 
       expect(signInValidate(values)).toMatchObject({
-        email: '"email" is not allowed to be empty',
+        identifier: '"E-mail" is not allowed to be empty',
         password: '"password" is not allowed to be empty'
       })
     })
 
     it('should return invalid email error', () => {
-      const values = { email: 'invalid-email', password: '1234' }
-      expect(signInValidate(values).email).toMatchInlineSnapshot(
-        `"\\"email\\" must be a valid email"`
+      const values = { identifier: 'invalid-email', password: '1234' }
+      expect(signInValidate(values).identifier).toMatchInlineSnapshot(
+        `"\\"E-mail\\" must be a valid email"`
       )
     })
   })

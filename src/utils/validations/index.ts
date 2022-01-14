@@ -10,7 +10,11 @@ const fieldsValidations = {
   confirm_password: Joi.string()
     .valid(Joi.ref('password'))
     .required()
-    .messages({ 'any.only': 'confirm password does not match with password' })
+    .messages({ 'any.only': 'confirm password does not match with password' }),
+  identifier: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .label('E-mail')
 }
 
 export type FieldErrors = {
@@ -35,11 +39,14 @@ export function signUpValidate(values: UsersPermissionsRegisterInput) {
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 
-type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
+type SignInValues = {
+  identifier: string
+  password: string
+}
 
 export function signInValidate(values: SignInValues) {
-  const { email, password } = fieldsValidations
-  const schema = Joi.object({ email, password })
+  const { identifier, password } = fieldsValidations
+  const schema = Joi.object({ identifier, password })
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
