@@ -34,7 +34,8 @@ function getFieldErrors(objError: Joi.ValidationResult) {
 }
 
 export function signUpValidate(values: UsersPermissionsRegisterInput) {
-  const schema = Joi.object(fieldsValidations)
+  const { username, email, password, confirm_password } = fieldsValidations
+  const schema = Joi.object({ username, email, password, confirm_password })
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
