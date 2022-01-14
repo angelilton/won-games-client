@@ -14,10 +14,11 @@ import * as S from './styles'
 import UserDropdown from 'components/UserDropdown'
 
 export type MenuProps = {
-  username?: string
+  username?: string | null
+  loading?: boolean
 }
 
-const Menu = ({ username }: MenuProps) => {
+const Menu = ({ username, loading }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -47,34 +48,36 @@ const Menu = ({ username }: MenuProps) => {
         </S.MenuNav>
       </MediaMatch>
 
-      <S.MenuGroup>
-        <S.IconWrapper>
-          <SearchIcon aria-label="Search" />
-        </S.IconWrapper>
+      {!loading && (
+        <S.MenuGroup>
+          <S.IconWrapper>
+            <SearchIcon aria-label="Search" />
+          </S.IconWrapper>
 
-        <S.IconWrapper>
+          <S.IconWrapper>
+            <MediaMatch greaterThan="medium">
+              <CartDropdown />
+            </MediaMatch>
+            <MediaMatch lessThan="medium">
+              <Link href="/cart">
+                <a>
+                  <CartIcon />
+                </a>
+              </Link>
+            </MediaMatch>
+          </S.IconWrapper>
+
           <MediaMatch greaterThan="medium">
-            <CartDropdown />
+            {!username ? (
+              <Link href="/sign-in" passHref>
+                <Button as="a">Sign in</Button>
+              </Link>
+            ) : (
+              <UserDropdown username={username} />
+            )}
           </MediaMatch>
-          <MediaMatch lessThan="medium">
-            <Link href="/cart">
-              <a>
-                <CartIcon />
-              </a>
-            </Link>
-          </MediaMatch>
-        </S.IconWrapper>
-
-        <MediaMatch greaterThan="medium">
-          {!username ? (
-            <Link href="/sign-in" passHref>
-              <Button as="a">Sign in</Button>
-            </Link>
-          ) : (
-            <UserDropdown username={username} />
-          )}
-        </MediaMatch>
-      </S.MenuGroup>
+        </S.MenuGroup>
+      )}
 
       <S.MobileMenu
         aria-hidden={!isOpen}
