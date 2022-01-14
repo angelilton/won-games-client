@@ -29,7 +29,11 @@ const UserNav = () => (
       </S.Link>
     </Link>
 
-    <S.Link role="button" title="Sign out" onClick={() => signOut()}>
+    <S.Link
+      role="button"
+      title="Sign out"
+      onClick={() => signOut({ callbackUrl: '/' })}
+    >
       <ExitToApp />
       <span>Sign out</span>
     </S.Link>
