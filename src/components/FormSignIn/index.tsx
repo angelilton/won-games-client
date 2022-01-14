@@ -18,8 +18,6 @@ const FormSignIn = () => {
 
   const { push } = useRouter()
 
-  console.log(filedError)
-
   const handleInput = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }))
   }

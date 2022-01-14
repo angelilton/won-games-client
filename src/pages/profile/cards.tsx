@@ -1,7 +1,8 @@
+import protectedRouter from 'utils/protected-routes'
+import { GetServerSidePropsContext } from 'next'
+import Profile from 'templates/Profile'
 import CardsList, { CardsListProps } from 'components/CardsList'
 import mockCards from 'components/PaymentOptions/mock'
-
-import Profile from 'templates/Profile'
 
 export default function index({ cards }: CardsListProps) {
   return (
@@ -11,9 +12,12 @@ export default function index({ cards }: CardsListProps) {
   )
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await protectedRouter(context)
+
   return {
     props: {
+      session,
       cards: mockCards
     }
   }
