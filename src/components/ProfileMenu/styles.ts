@@ -28,6 +28,7 @@ const linkModifiers = (theme: DefaultTheme) => css`
 
 export const Link = styled.a<LinkProps>`
   ${({ theme, isActive }) => css`
+    cursor: pointer;
     display: flex;
     align-items: center;
     text-decoration: none;
