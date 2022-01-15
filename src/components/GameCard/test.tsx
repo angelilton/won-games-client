@@ -32,17 +32,17 @@ describe('<GameCard />', () => {
     expect(screen.getByRole('img')).toHaveAttribute('alt', 'Population Zero')
 
     //verifiquem se price e renderizado
-    expect(screen.getByText('$235.00')).toBeInTheDocument()
+    expect(screen.getByText('235')).toBeInTheDocument()
   })
 
   it('should render a line-through in price when promotional', () => {
     customRender(<GameCard {...props} promotionalPrice={15} />)
 
-    expect(screen.getByText('$235.00')).toHaveStyle({
+    expect(screen.getByText('235')).toHaveStyle({
       textDecoration: 'line-through'
     })
 
-    expect(screen.getByText('$15.00')).not.toHaveStyle({
+    expect(screen.getByText('15')).not.toHaveStyle({
       textDecoration: 'line-through'
     })
   })

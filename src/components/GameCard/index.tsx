@@ -66,8 +66,14 @@ const GameCard = ({
       </S.FavButton>
 
       <S.BuyBox>
-        {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
-        <S.Price>{price}</S.Price>
+        {promotionalPrice ? (
+          <>
+            <S.Price isPromotional>{price}</S.Price>
+            <S.Price>{promotionalPrice}</S.Price>
+          </>
+        ) : (
+          <S.Price>{price}</S.Price>
+        )}
         <CartButton id={id} />
       </S.BuyBox>
     </S.Content>

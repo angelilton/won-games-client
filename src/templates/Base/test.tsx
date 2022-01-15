@@ -3,6 +3,12 @@ import { customRender } from 'utils/test-utils'
 
 import Base from '.'
 
+jest.mock('next-auth/react', () => ({
+  useSession: jest.fn(() => {
+    return [{ date: { session: null } }]
+  })
+}))
+
 jest.mock('components/Menu', () => {
   return {
     __esModule: true,
