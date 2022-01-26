@@ -3,20 +3,30 @@ import Heading from 'components/Heading'
 import TextField from 'components/TextField'
 import * as S from './styles'
 
-const FormProfile = () => (
+export type FormProfileProps = {
+  username?: string
+  email?: string
+}
+
+const FormProfile = ({ email, username }: FormProfileProps) => (
   <>
     <Heading lineBottom color="black" size="small">
       My profile
     </Heading>
 
     <S.Form>
-      <TextField label="Name" name="name" initialValue="John Doe" />
+      <TextField
+        name="username"
+        label="Username"
+        placeholder="Username"
+        initialValue={username}
+      />
 
       <TextField
+        name="email"
         type="email"
         label="E-mail"
-        name="email"
-        initialValue="johndoe@gmail.com"
+        initialValue={email}
         disabled
       />
 
