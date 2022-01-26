@@ -1,18 +1,37 @@
+import { useMemo } from 'react'
 import {
   ApolloClient,
+  ApolloLink,
+  concat,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject
 } from '@apollo/client'
 import { concatPagination } from '@apollo/client/utilities'
-import { useMemo } from 'react'
+import { Session } from 'next-auth/core/types'
 
 let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
-function createApolloClient() {
+function createApolloClient(session?: Session | null) {
+  const httpLink = new HttpLink({
+    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
+  })
+
+  const authMiddleware = new ApolloLink((operation, forward) => {
+    // add the authorization to the headers
+    operation.setContext(({ headers = {} }) => ({
+      headers: {
+        ...headers,
+        authorization: session?.jwt ? `Bearer ${session?.jwt}` : ''
+      }
+    }))
+
+    return forward(operation)
+  })
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new HttpLink({ uri: 'http://localhost:1337/graphql' }),
+    link: concat(authMiddleware, httpLink),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
@@ -25,9 +44,12 @@ function createApolloClient() {
   })
 }
 
-export function initializeApollo(initialState = null) {
+export function initializeApollo(
+  initialState = null,
+  session?: Session | null
+) {
   // serve para verificar se já existe uma instância, para não criar outra
-  const apolloClientGlobal = apolloClient ?? createApolloClient()
+  const apolloClientGlobal = apolloClient ?? createApolloClient(session)
 
   // se a página usar o apolloClient no lado client
   // hidratamos o estado inicial aqui
@@ -43,7 +65,10 @@ export function initializeApollo(initialState = null) {
   return apolloClient
 }
 
-export function useApollo(initialState = null) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState])
+export function useApollo(initialState = null, session?: Session) {
+  const store = useMemo(() => initializeApollo(initialState, session), [
+    initialState,
+    session
+  ])
   return store
 }
