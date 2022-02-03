@@ -54,7 +54,7 @@ export function signInValidate(values: SignInValues) {
 
 type ForgotValidateParams = Pick<UsersPermissionsRegisterInput, 'email'>
 
-export function forgotValidade(values: ForgotValidateParams) {
+export function forgotValidate(values: ForgotValidateParams) {
   const { email } = fieldsValidations
   const schema = Joi.object({ email })
 
@@ -66,7 +66,7 @@ type ResetValidateParams = {
   confirm_password: string
 }
 
-export function resetValidade(values: ResetValidateParams) {
+export function resetValidate(values: ResetValidateParams) {
   const { password, confirm_password } = fieldsValidations
   const schema = Joi.object({ password, confirm_password })
 

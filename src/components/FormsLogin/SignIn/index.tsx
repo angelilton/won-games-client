@@ -16,7 +16,7 @@ import {
 
 const FormSignIn = () => {
   const [formError, setFormError] = useState('')
-  const [filedError, setFiledError] = useState<FieldErrors>({})
+  const [fieldError, setFieldError] = useState<FieldErrors>({})
   const [values, setValues] = useState({ identifier: '', password: '' })
   const [loading, setLoading] = useState(false)
 
@@ -35,12 +35,12 @@ const FormSignIn = () => {
     const erros = signInValidate(values)
 
     if (Object.keys(erros).length) {
-      setFiledError(erros)
+      setFieldError(erros)
       setLoading(false)
       return
     }
 
-    setFiledError({})
+    setFieldError({})
 
     //sign-in
     const result: SignInResponse = await signIn('credentials', {
@@ -57,7 +57,7 @@ const FormSignIn = () => {
 
     // jogar o erro
     if (result.ok === false) {
-      setFiledError({
+      setFieldError({
         identifier: 'check your email',
         password: 'check your password'
       })
@@ -77,7 +77,7 @@ const FormSignIn = () => {
           name="email"
           placeholder="Email"
           type="email"
-          error={filedError?.identifier}
+          error={fieldError?.identifier}
           onInputChange={(v) => handleInput('identifier', v)}
           icon={<Email />}
         />
@@ -85,7 +85,7 @@ const FormSignIn = () => {
           name="password"
           placeholder="Password"
           type="password"
-          error={filedError?.password}
+          error={fieldError?.password}
           onInputChange={(v) => handleInput('password', v)}
           icon={<Lock />}
         />
