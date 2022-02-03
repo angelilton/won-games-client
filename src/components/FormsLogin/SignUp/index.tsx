@@ -14,8 +14,7 @@ import {
   AccountCircle,
   ErrorOutline
 } from '@styled-icons/material-outlined'
-
-import * as S from './styles'
+import { FormErrorMessage, FormLink, FormWrapper } from '../styles'
 
 const initialState = {
   username: '',
@@ -72,11 +71,11 @@ const FormSignUp = () => {
   }
 
   return (
-    <S.Wrapper>
+    <FormWrapper>
       {!!formError && (
-        <S.ErrorMessage>
+        <FormErrorMessage>
           <ErrorOutline /> {formError}
-        </S.ErrorMessage>
+        </FormErrorMessage>
       )}
       <form onSubmit={handleSubmit}>
         <TextField
@@ -118,14 +117,14 @@ const FormSignUp = () => {
           {loading ? <ButtonLoading /> : <span>Sign up now</span>}
         </Button>
 
-        <S.FormLink>
+        <FormLink>
           Already have an account?{' '}
           <Link href="/sign-in">
             <a>Sign in</a>
           </Link>
-        </S.FormLink>
+        </FormLink>
       </form>
-    </S.Wrapper>
+    </FormWrapper>
   )
 }
 

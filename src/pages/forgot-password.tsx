@@ -1,5 +1,5 @@
 import Auth from 'templates/Auth'
-import FormForgotPassword from 'components/FormForgotPassword'
+import { FormForgotPassword } from 'components/FormsLogin'
 
 export default function ForgotPassword() {
   return (

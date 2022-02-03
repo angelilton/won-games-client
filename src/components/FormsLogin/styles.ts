@@ -4,7 +4,7 @@ import { lighten, darken } from 'polished'
 import * as TextFieldStyles from 'components/TextField/styles'
 import * as ButtonStyles from 'components/Button/styles'
 
-export const Wrapper = styled.div`
+export const FormWrapper = styled.div`
   ${({ theme }) => css`
     ${TextFieldStyles.Wrapper} {
       margin: ${theme.spacings.xxsmall} 0;
@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const ErrorMessage = styled.div`
+export const FormErrorMessage = styled.div`
   ${({ theme }) => css`
     text-align: center;
     color: red;
@@ -27,7 +27,7 @@ export const ErrorMessage = styled.div`
   `}
 `
 
-export const ForgotPassword = styled.a`
+export const ForgotPasswordLink = styled.a`
   ${({ theme }) => css`
     display: block;
     font-size: ${theme.font.sizes.small};

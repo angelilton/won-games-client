@@ -7,8 +7,12 @@ import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { ButtonLoading } from 'components/Button/styles'
 import { Email, Lock, ErrorOutline } from '@styled-icons/material-outlined'
-
-import * as S from './styles'
+import {
+  ForgotPasswordLink,
+  FormLink,
+  FormWrapper,
+  FormErrorMessage
+} from '../styles'
 
 const FormSignIn = () => {
   const [formError, setFormError] = useState('')
@@ -62,11 +66,11 @@ const FormSignIn = () => {
   }
 
   return (
-    <S.Wrapper>
+    <FormWrapper>
       {!!formError && (
-        <S.ErrorMessage>
+        <FormErrorMessage>
           <ErrorOutline /> {formError}
-        </S.ErrorMessage>
+        </FormErrorMessage>
       )}
       <form onSubmit={handleSubmit}>
         <TextField
@@ -86,20 +90,20 @@ const FormSignIn = () => {
           icon={<Lock />}
         />
         <Link href={'/forgot-password'} passHref>
-          <S.ForgotPassword>Forgot your password?</S.ForgotPassword>
+          <ForgotPasswordLink>Forgot your password?</ForgotPasswordLink>
         </Link>
         <Button type="submit" size="large" fullWidth disabled={loading}>
           {loading ? <ButtonLoading /> : <span>Sign in now</span>}
         </Button>
 
-        <S.FormLink>
+        <FormLink>
           Don’t have an account?{' '}
           <Link href="/sign-up">
             <a>Sign up</a>
           </Link>
-        </S.FormLink>
+        </FormLink>
       </form>
-    </S.Wrapper>
+    </FormWrapper>
   )
 }
 export default FormSignIn

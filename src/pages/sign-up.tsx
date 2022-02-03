@@ -1,5 +1,5 @@
 import Auth from 'templates/Auth'
-import FormSignUp from 'components/FormSignUp'
+import { FormSignUp } from 'components/FormsLogin'
 
 const signUp = () => (
   <Auth title="Sign up">
