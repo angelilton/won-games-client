@@ -15,6 +15,17 @@ export const FormWrapper = styled.div`
     }
   `}
 `
+export const FormSuccessMessage = styled.p`
+  ${({ theme }) => css`
+    text-align: center;
+    color: ${theme.colors.black};
+    font-size: ${theme.font.sizes.small};
+    svg {
+      color: ${theme.colors.secondary};
+      width: 2.4rem;
+    }
+  `}
+`
 
 export const FormErrorMessage = styled.div`
   ${({ theme }) => css`
