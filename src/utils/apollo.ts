@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import {
   ApolloClient,
   ApolloLink,
-  concat,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject
@@ -31,7 +30,7 @@ function createApolloClient(session?: Session | null) {
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: concat(authMiddleware, httpLink),
+    link: authMiddleware.concat(httpLink),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {

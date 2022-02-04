@@ -52,8 +52,6 @@ const FormForgotPassword = () => {
     const data = await response.json()
     setLoading(false)
 
-    console.log('data:', data)
-
     if (data.error) {
       setFormError(data.message[0].messages[0].message)
     } else {
